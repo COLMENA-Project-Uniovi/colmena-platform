@@ -1,0 +1,29 @@
+#NeoSite .htaccess file format
+
+<IfModule mod_rewrite.c>
+    # Redirections
+    RewriteEngine on
+
+    # Development url base
+    RewriteBase /
+    # Production url base, important include the last slash
+    # RewriteBase /
+
+    # Adding complements to URL
+    # Add slash to the end of the URL
+    RewriteCond %{REQUEST_URI} /+[^\.]+$
+    RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
+
+
+    # In every request change the URL, sending to the /src/Router/index.php file with the parameter
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteRule ^(.*)/?$ src/Utils/Router/index.php?urlBase=$1 [QSA,L]
+
+    Header add Access-Control-Allow-Origin "*"
+    Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
+
+    # TODO Check if its necessary
+    #RewriteRule ^$   src/   [L]
+    #RewriteRule (.*) src/$1 [L]
+</IfModule>
