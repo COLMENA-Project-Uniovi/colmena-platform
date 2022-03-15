@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
+    <router-link to="/"><img alt="Colmena logo" width="150px" src="../assets/logo-horizontal.svg" /></router-link>
     <div v-if="isLoggedIn" class="auth-nav">
       <a @click="logout">Logout</a>
     </div>
@@ -37,6 +37,7 @@ export default {
   justify-content: space-between;
   padding: 0 50px;
   gap: 20px;
+  display: none;
 }
 
 .no-auth-nav {

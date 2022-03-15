@@ -72,7 +72,7 @@ body {
   margin: 0;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -106,11 +106,13 @@ h4 {
 }
 
 :root {
-  --background-color-primary: #ebebeb;
+  --background-color-primary: #fffcf7;
   --background-color-secondary: #fafafa;
   --accent-color: #cacaca;
   --text-primary-color: #222;
   --element-size: 4rem;
+
+  --h1-size: 4rem;
 }
 
 /* Define styles for the root window with dark - mode preference */
@@ -132,7 +134,8 @@ h2.title {
   text-align: center;
   color: #2c3e50;
   background-color: var(--background-color-primary);
-  height: 100vh;
+  height: fit-content;
+  width: 100%;
 }
 
 .theme-selector {

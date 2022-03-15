@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="image">
-      <img alt="Colmena logo" src="../assets/logo.png" />
+      <img alt="Colmena logo" src="../assets/logo-text-black.svg" />
     </div>
     <div class="content">
       <form @submit.prevent="submit" class="signin">
@@ -20,7 +20,7 @@
           class="username"
           placeholder="Contraseña"
         />
-        <button type="submit" class="btn">Submit</button>
+        <Button text="Acceder" type="submit" />
       </form>
       <p v-if="showError" id="error">Username or Password is incorrect</p>
     </div>
@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 import { mapActions } from "vuex";
 
 export default {
   name: "Login",
-  components: {},
+  components: { Button },
   data() {
     return {
       form: {
@@ -67,21 +68,24 @@ h3 {
 
 .login {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: row;
-  .image {
-    width: 50%;
-    background-image: url(https://beta.colmenaproject.es/admin/img/wallpaper.jpg);
-    display: flex;
+  @media (max-width: 768px) {
     flex-direction: column;
-    height: 100%;
+  }
+  .image {
+    flex: 1 0 50%;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    img {
+      width: 500px;
+    }
   }
   .content {
-    width: 50%;
-    background: white;
+    flex: 1 0 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,6 +96,10 @@ h3 {
     display: flex;
     flex-direction: column;
     width: 50%;
+    @media (max-width: 768px) {
+          width: 100%;
+    }
+
     .username {
       font-weight: bold;
       margin: 0 35px 20px;
@@ -112,7 +120,7 @@ h3 {
       border-radius: 5px;
       outline: none;
       border: none;
-      background: #f8b333;
+      background: #f3933d;
       color: white;
       font-size: 14px;
     }
