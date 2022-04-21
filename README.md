@@ -1,95 +1,69 @@
-<div id="top"></div>
+# colmena
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://colmenaproject.es">
-    <img src="https://colmenaproject.es/img/content/logo.png" alt="Logo" height="80">
-  </a>
+## Build Setup
 
-  <h3 align="center">COLMENA Platform</h3>
+```bash
+# install dependencies
+$ npm install
 
-  <p align="center">
-    A Complete presentation application for deal with the information related with the whole COLMENA environment
-  </p>
-</div>
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+# build for production and launch server
+$ npm run build
+$ npm run start
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+# generate static project
+$ npm run generate
+```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-### Built With
-The project is using these main technologies:
-* [VueJS](https://vuejs.org/)
+## Special Directories
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
 
-<!-- GETTING STARTED -->
-## Getting Started
+### `assets`
 
-### Prerequisites
+The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
 
-### Installation
-<p align="right">(<a href="#top">back to top</a>)</p>
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
 
-<!-- USAGE EXAMPLES -->
-## Usage
-<p align="right">(<a href="#top">back to top</a>)</p>
+### `components`
 
-<!-- CONTRIBUTING -->
-## Contributing
+The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+### `layouts`
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
 
-<!-- LICENSE -->
-## License
-<p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTACT -->
-## Contact
+### `pages`
 
-Founded by Carlos Medina - fernandezmedcarlos@uniovi.es
+This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
 
-Project Link: [https://github.com/LeeScoresby/repo_name](https://github.com/LeeScoresby/colmena-manager)
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+### `plugins`
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+
+### `static`
+
+This directory contains your static files. Each file inside this directory is mapped to `/`.
+
+Example: `/static/robots.txt` is mapped as `/robots.txt`.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+
+### `store`
+
+This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
