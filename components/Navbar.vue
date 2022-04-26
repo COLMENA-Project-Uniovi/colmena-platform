@@ -1,40 +1,20 @@
 <template>
-  <nav
-    class="
-      bg-white
-      border-gray-200
-      px-2
-      sm:px-4
-      py-2.5
-      rounded
-      dark:bg-gray-800
-    "
-  >
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
+  <nav class="bg-white px-10 py-5 dark:bg-gray-800">
+    <div class="container flex flex-wrap justify-between items-center">
       <a href="https://flowbite.com" class="flex items-center">
         <img
-          src="/docs/images/logo.svg"
+          src="~/assets/logos/logo-horizontal.svg"
           class="mr-3 h-6 sm:h-9"
           alt="Flowbite Logo"
         />
-        <span
-          class="
-            self-center
-            text-xl
-            font-semibold
-            whitespace-nowrap
-            dark:text-white
-          "
-          >Flowbite</span
-        >
       </a>
       <div class="flex md:order-2">
         <button
           type="button"
           class="
             text-white
-            bg-blue-700
-            hover:bg-blue-800
+            bg-yellow-500
+            hover:bg-yellow-600
             focus:ring-4 focus:outline-none focus:ring-blue-300
             font-medium
             rounded-lg
@@ -44,7 +24,7 @@
             text-center
             mr-3
             md:mr-0
-            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+            dark:bg-blue-600 dark:hover:bg-yellow-600 dark:focus:ring-blue-800
           "
         >
           Get started
@@ -121,7 +101,7 @@
                 text-white
                 bg-blue-700
                 rounded
-                md:bg-transparent md:text-blue-700 md:p-0
+                md:bg-transparent md:text-yellow-500 md:p-0
                 dark:text-white
               "
               aria-current="page"
@@ -141,7 +121,7 @@
                 hover:bg-gray-50
                 md:hover:bg-transparent
                 md:border-0
-                md:hover:text-blue-700
+                md:hover:text-yellow-500
                 md:p-0
                 md:dark:hover:text-white
                 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
@@ -164,7 +144,7 @@
                 hover:bg-gray-50
                 md:hover:bg-transparent
                 md:border-0
-                md:hover:text-blue-700
+                md:hover:text-yellow-500
                 md:p-0
                 md:dark:hover:text-white
                 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
@@ -187,7 +167,7 @@
                 hover:bg-gray-50
                 md:hover:bg-transparent
                 md:border-0
-                md:hover:text-blue-700
+                md:hover:text-yellow-500
                 md:p-0
                 md:dark:hover:text-white
                 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
@@ -199,12 +179,14 @@
           </li>
         </ul>
       </div>
+      <AppDarkModeToggle></AppDarkModeToggle>
     </div>
   </nav>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+
 
 export default {
   computed: {

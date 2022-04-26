@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section bg-red-600">
     <div class="container">
       <h1 class="title">Nuxt Auth</h1>
     </div>
