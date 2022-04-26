@@ -50,6 +50,8 @@
 
 <script>
 
+import Notification from '~/components/Notification.vue'
+
 export default {
   components: {
     Notification,

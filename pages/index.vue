@@ -14,3 +14,10 @@ export default Vue.extend({
   auth: false,
 });
 </script>
+
+<style>
+section {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+}
+</style>
