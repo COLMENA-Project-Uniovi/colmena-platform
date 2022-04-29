@@ -12,17 +12,7 @@
 </template>
 
 <script>
-import Navbar from "~/components/Navbars/Navbar";
-import NavbarAuth from "~/components/Navbars/NavbarAuth";
-import Header from "~/components/Headers/Header";
-
 export default {
-  components: {
-    Navbar,
-    NavbarAuth,
-    Header,
-  },
-
   data: () => ({
     isLogged: true,
   }),

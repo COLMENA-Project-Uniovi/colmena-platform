@@ -15,14 +15,9 @@
 </template>
 
 <script>
-import Button from "../Buttons/Button.vue";
-import Link from "../Links/Link.vue";
 
 export default {
-  components: {
-    Button,
-    Link,
-  },
+
 };
 </script>
 

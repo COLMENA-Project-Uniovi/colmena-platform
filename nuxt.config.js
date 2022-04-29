@@ -51,6 +51,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
+    '@vueuse/nuxt',
   ],
 
   colorMode: {

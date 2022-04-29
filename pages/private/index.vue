@@ -10,13 +10,10 @@
 </template>
 
 <script lang="ts">
-import Header from "~/components/Headers/Header.vue";
 
 export default {
   auth: false,
-  components: {
-    Header,
-  },
+
 };
 </script>
 

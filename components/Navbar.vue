@@ -34,14 +34,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Button from "../Buttons/Button.vue";
-import Link from "../Links/Link.vue";
 
 export default {
-  components: {
-    Button,
-    Link,
-  },
   computed: {
     ...mapGetters(["isAuthenticated", "loggedInUser"]),
   },
