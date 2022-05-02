@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white px-10 py-5 dark:bg-gray-800">
+  <nav class="px-10 py-5 flex justify-center">
     <div class="container flex flex-wrap justify-between items-center">
       <a href="/" class="flex items-center">
         <img
@@ -9,7 +9,7 @@
         />
       </a>
       <div class="flex flex-row justify-between items-center">
-        <ul class="flex flex-row gap-5 content-center">
+        <!-- <ul class="flex flex-row gap-5 content-center">
           <li>
             <Link text="Inicio" type="terciary" />
           </li>
@@ -22,9 +22,8 @@
           <li>
             <Link text="Contact" href="/contact" type="terciary" />
           </li>
-        </ul>
+        </ul> -->
       </div>
-
       <div class="flex">
         <Link text="Iniciar sesión" type="primary" href="/login" />
       </div>
@@ -47,3 +46,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+nav {
+  background-color: transparent;
+  width: 100vw;
+  height: 100px;
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0ms;
+}
+
+.dark nav {
+  background-color: tran;
+}
+</style>

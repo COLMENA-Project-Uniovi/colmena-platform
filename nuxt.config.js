@@ -27,19 +27,22 @@ export default {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'
     }
+    ],
+    script: [
+      { src: 'https://kit.fontawesome.com/adfced52be.js', crossorigin: "anonymous" }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/fontawesome.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,7 +54,6 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
-    '@vueuse/nuxt',
   ],
 
   colorMode: {
@@ -65,7 +67,13 @@ export default {
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        "postcss-custom-properties": false
+      },
+    },
+  },
 
   router: {
     middleware: ['auth'],
@@ -73,20 +81,30 @@ export default {
 
   axios: {
     credentials: false,
-    baseURL: 'https://beta.colmenaproject.es/admin/api/1.0/',
+    baseURL: 'http://admin.colmenaproject.es:49160/',
   },
 
   auth: {
     strategies: {
       local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
         endpoints: {
           login: {
-            url: '/users/users/login.json',
+            url: 'auth/local',
             method: 'post',
-            propertyName: 'data.token'
+            propertyName: 'jwt'
           },
           user: {
-            url: 'me',
+            url: 'users/me',
             method: 'get',
             propertyName: 'data'
           },
