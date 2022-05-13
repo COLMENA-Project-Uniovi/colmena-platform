@@ -81,7 +81,7 @@ export default {
 
   axios: {
     credentials: false,
-    baseURL: 'http://admin.colmenaproject.es:49160/',
+    baseURL: 'https://admin.colmenaproject.es/api/',
   },
 
   auth: {

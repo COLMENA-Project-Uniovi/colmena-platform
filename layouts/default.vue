@@ -1,9 +1,5 @@
 <template>
   <div>
-
-
-    {{this.$auth.user}}
-    {{this.$auth.loggedIn}}
     <div v-if="!isAuthenticated">
       <Navbar />
       <nuxt />

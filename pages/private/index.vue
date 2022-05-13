@@ -4,8 +4,8 @@
     <section class="section">
       <div class="container">
         <ul id="example-1">
-          <li v-for="item in users" v-bind:key="item.id">
-            {{ item.username }}
+          <li v-for="item in subjects" v-bind:key="item.id">
+            {{ item.name }}
           </li>
         </ul>
       </div>
@@ -22,13 +22,13 @@ export default {
   },
   data: function () {
     return {
-      users: 0,
+      subjects: 0,
     };
   },
   async created() {
-    const response = await this.$axios.get("http://admin.colmenaproject.es:49160/users");
+    const response = await this.$axios.get("subjects/");
     const responseJSON = await response;
-    this.users = responseJSON.data;
+    this.subjects = responseJSON.data;
   },
 };
 </script>
