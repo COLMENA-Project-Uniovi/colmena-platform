@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  auth: true,
+  auth: false,
   transition: "home",
   head: {
     title: "Inicio | Colmena Project",
@@ -26,9 +26,9 @@ export default {
     };
   },
   async created() {
-    const response = await this.$axios.get("subjects/");
-    const responseJSON = await response;
-    this.subjects = responseJSON.data;
+    // const response = await this.$axios.get("subjects/");
+    // const responseJSON = await response;
+    // this.subjects = responseJSON.data;
   },
 };
 </script>

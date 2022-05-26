@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="!isAuthenticated">
+    <div v-if="!localStorage.user">
       <Navbar />
       <nuxt />
     </div>
 
     <div v-else class="layout">
-      {{ loggedInUser.username }}
+      {{ localStorage.user.name }}
       <div class="left">
         <NavbarAuth />
       </div>

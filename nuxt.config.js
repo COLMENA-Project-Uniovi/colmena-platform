@@ -1,4 +1,5 @@
 export default {
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'colmena',
@@ -81,27 +82,27 @@ export default {
 
   axios: {
     credentials: false,
-    baseURL: 'https://admin.colmenaproject.es/api/',
+    baseURL: 'https://beta.colmenaproject.es/admin/api/1.0/',
   },
 
   auth: {
     strategies: {
       local: {
-        token: {
-          property: 'token',
-          global: true,
-          // required: true,
-          // type: 'Bearer'
-        },
+        // token: {
+        //   property: 'token',
+        //   global: true,
+        //   // required: true,
+        //   // type: 'Bearer'
+        // },
         user: {
           property: 'user',
           // autoFetch: true
         },
         endpoints: {
           login: {
-            url: 'auth/local',
+            url: 'users/users/login.json',
             method: 'post',
-            propertyName: 'jwt'
+            // propertyName: 'jwt'
           },
           user: {
             url: 'users/me',

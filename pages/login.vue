@@ -18,18 +18,11 @@
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input
-              type="password"
-              class="input"
-              name="password"
-              v-model="password"
-            />
+            <input type="password" class="input" name="password" v-model="password" />
           </div>
         </div>
         <div class="control">
-          <button type="submit" class="button is-dark is-fullwidth">
-            Log In
-          </button>
+          <button type="submit" class="button is-dark is-fullwidth">Log In</button>
         </div>
       </form>
       <div class="has-text-centered" style="margin-top: 20px">
@@ -57,21 +50,31 @@ export default {
       try {
         const { data } = await this.$auth.loginWith("local", {
           data: {
-            identifier: this.email,
-            password: this.password,
+            username: "elmer.cortez@neozink.com",
+            password: "Pr43b4",
           },
         });
-        this.$auth.strategy.token.set(data.jwt);
-        this.$auth.setUser(data.user);
-        this.$axios.setHeader('Authorization', data.jwt);
+
+        // // this.$auth.strategy.token.set(data.jwt);
+        // const user = JSON.stringify(data);
+        // const dataUser = {
+        //   user: JSON.parse(user),
+        // };
+        // this.$auth.setUser(dataUser);
+        // localStorage.setItem('user', JSON.string)
+        // console.log(state.auth);
+
+        localStorage.user = JSON.stringify(data);
+        // console.log(localStorage.user)
+
+        // // this.$axios.setHeader('Authorization', data.jwt);
         this.$router.push("/private");
       } catch (e) {
-        this.error = e.response.data.message;
+        console.log(e);
       }
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
