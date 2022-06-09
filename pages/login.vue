@@ -18,11 +18,18 @@
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input type="password" class="input" name="password" v-model="password" />
+            <input
+              type="password"
+              class="input"
+              name="password"
+              v-model="password"
+            />
           </div>
         </div>
         <div class="control">
-          <button type="submit" class="button is-dark is-fullwidth">Log In</button>
+          <button type="submit" class="button is-dark is-fullwidth">
+            Log In
+          </button>
         </div>
       </form>
       <div class="has-text-centered" style="margin-top: 20px">
@@ -55,26 +62,18 @@ export default {
           },
         });
 
-        // // this.$auth.strategy.token.set(data.jwt);
-        // const user = JSON.stringify(data);
-        // const dataUser = {
-        //   user: JSON.parse(user),
-        // };
-        // this.$auth.setUser(dataUser);
-        // localStorage.setItem('user', JSON.string)
-        // console.log(state.auth);
-
-        localStorage.user = JSON.stringify(data);
-        // console.log(localStorage.user)
-
-        // // this.$axios.setHeader('Authorization', data.jwt);
+        console.log(data)
+        this.$auth.strategy.token.set(data);
+        this.$auth.setUser(data);
+        this.$axios.setHeader('Authorization', data.id);
         this.$router.push("/private");
       } catch (e) {
-        console.log(e);
+        this.error = e.response.data.message;
       }
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

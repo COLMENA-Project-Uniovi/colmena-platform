@@ -8,31 +8,31 @@ export default {
       // class: 'dark'
     },
     meta: [{
-      charset: 'utf-8'
-    },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1'
-    },
-    {
-      hid: 'description',
-      name: 'description',
-      content: ''
-    },
-    {
-      name: 'format-detection',
-      content: 'telephone=no'
-    }
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: ''
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no'
+      }
     ],
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
-    }
-    ],
-    script: [
-      { src: 'https://kit.fontawesome.com/adfced52be.js', crossorigin: "anonymous" }
-    ]
+    }],
+    script: [{
+      src: 'https://kit.fontawesome.com/adfced52be.js',
+      crossorigin: "anonymous"
+    }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -42,7 +42,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/fontawesome.js'
+    '~/plugins/fontawesome.js',
+    { src: '~/plugins/apexcharts.js', mode: 'client' },
+    
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,7 +56,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
+    '@nuxtjs/color-mode'
   ],
 
   colorMode: {
@@ -64,7 +66,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -88,12 +90,12 @@ export default {
   auth: {
     strategies: {
       local: {
-        // token: {
-        //   property: 'token',
-        //   global: true,
-        //   // required: true,
-        //   // type: 'Bearer'
-        // },
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
         user: {
           property: 'user',
           // autoFetch: true
@@ -102,7 +104,7 @@ export default {
           login: {
             url: 'users/users/login.json',
             method: 'post',
-            // propertyName: 'jwt'
+            propertyName: 'jwt'
           },
           user: {
             url: 'users/me',
