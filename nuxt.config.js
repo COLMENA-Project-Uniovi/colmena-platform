@@ -8,21 +8,21 @@ export default {
       // class: 'dark'
     },
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: ''
-      },
-      {
-        name: 'format-detection',
-        content: 'telephone=no'
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: ''
+    },
+    {
+      name: 'format-detection',
+      content: 'telephone=no'
+    }
     ],
     link: [{
       rel: 'icon',
@@ -44,7 +44,7 @@ export default {
   plugins: [
     '~/plugins/fontawesome.js',
     { src: '~/plugins/apexcharts.js', mode: 'client' },
-    
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -88,17 +88,23 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/private'
+    },
     strategies: {
       local: {
         token: {
           property: 'token',
           global: true,
-          // required: true,
-          // type: 'Bearer'
+          required: true,
+          type: 'Bearer'
         },
         user: {
           property: 'user',
-          // autoFetch: true
+          autoFetch: false
         },
         endpoints: {
           login: {
@@ -106,11 +112,7 @@ export default {
             method: 'post',
             propertyName: 'jwt'
           },
-          user: {
-            url: 'users/me',
-            method: 'get',
-            propertyName: 'data'
-          },
+          user: false,
           logout: false
         }
       }

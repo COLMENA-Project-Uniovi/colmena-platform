@@ -1,9 +1,7 @@
 <template>
   <nav class="py-5 h-full flex flex-col items-center justify-between">
     <div class="flex flex-col justify-between items-center w-full gap-4">
-      <NuxtLink
-        to="/private"
-        class="
+      <NuxtLink to="/private" class="
           logo
           nav-link
           bg-gray-200
@@ -14,15 +12,12 @@
           justify-center
           duration-300
           ease-in-out
-        "
-      >
+        ">
         <img src="~/assets/logos/logo-white.svg" alt="Logo" class="h-10 icon" />
         <div class="tooltip">Inicio</div>
       </NuxtLink>
 
-      <NuxtLink
-        to="/"
-        class="
+      <NuxtLink to="/" class="
           nav-link
           relative
           bg-gray-200
@@ -32,15 +27,12 @@
           items-center
           justify-center
           text-gray-500
-        "
-      >
+        ">
         <font-awesome-icon icon="fa-solid fa-book-open" class="text-xl icon" />
         <div class="tooltip">Asignaturas</div>
       </NuxtLink>
 
-      <NuxtLink
-        to="/"
-        class="
+      <NuxtLink to="/" class="
           nav-link
           relative
           bg-gray-200
@@ -50,16 +42,15 @@
           items-center
           justify-center
           text-gray-500
-        "
-      >
-        <font-awesome-icon
-          icon="fa-solid fa-chart-column"
-          class="text-xl icon"
-        />
+        ">
+        <font-awesome-icon icon="fa-solid fa-chart-column" class="text-xl icon" />
         <div class="tooltip">Estadísticas</div>
       </NuxtLink>
     </div>
-    <AppDarkModeToggle />
+    <div class="flex flex-col gap-4 ">
+      <AppDarkModeToggle />
+      <Logout />
+    </div>
   </nav>
 </template>
 
@@ -88,6 +79,7 @@ nav {
   background: rgb(245, 158, 11);
   border-radius: 20px;
 }
+
 .nav-link.logo:hover {
   background: rgb(245, 158, 11);
   border-radius: 20px;
@@ -146,14 +138,17 @@ nav {
     color: rgb(245, 158, 11);
     transform: translateY(2px) scaleX(0.9);
   }
+
   50% {
     color: rgb(245, 158, 11);
     transform: translateY(-4px) scaleX(1.05);
   }
+
   70% {
     color: rgb(245, 158, 11);
     transform: translateY(1px) scaleX(1.05);
   }
+
   100% {
     color: rgb(245, 158, 11);
     transform: translateY(0) scaleX(1);

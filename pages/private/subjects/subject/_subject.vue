@@ -3,6 +3,7 @@
     <Header title="Home" />
     <section class="section p-8">
       <div class="container w-full">
+        <p>{{subject}}</p>
         <h2>{{subject.name}}</h2>
         <p>Curso: {{subject.year}}</p>
         <p>Desde el {{subject.start_date}} hasta el {{subject.end_date}}</p>

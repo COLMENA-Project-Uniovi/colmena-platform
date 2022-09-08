@@ -1,26 +1,14 @@
 <template>
   <div>
-    <div class="layout">
-      <div class="left">
-        <NavbarAuth />
-      </div>
-
-      <div class="right">
-        <nuxt />
-      </div>
+    <div>
+      <Navbar />
+      <nuxt />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser"]),
-  },
-  data: () => ({
-    isLogged: false,
-  }),
 };
 </script>
 

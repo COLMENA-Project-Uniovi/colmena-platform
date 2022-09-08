@@ -1,10 +1,10 @@
 <template>
-  <nav class="px-10 py-5 flex justify-center">
-    <div class="container flex flex-wrap justify-between items-center">
+  <nav class="px-10 py-5 flex justify-between z-50">
+    <div class=" flex flex-wrap justify-between items-center w-full">
       <a href="/" class="flex items-center">
         <img
           src="~/assets/logos/logo-horizontal.svg"
-          class="mr-3 h-6 sm:h-9"
+          class="mr-3 h-6 sm:h-12"
           alt="Logo"
         />
       </a>
@@ -25,7 +25,7 @@
         </ul> -->
       </div>
       <div class="flex">
-        <Link text="Iniciar sesión" type="primary" href="/login" />
+        <Link text="Entrar" type="primary" href="/login" />
       </div>
     </div>
   </nav>
