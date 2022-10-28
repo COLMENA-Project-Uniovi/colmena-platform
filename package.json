@@ -21,6 +21,7 @@
     "apexcharts": "^3.35.3",
     "chart.js": "^3.8.0",
     "core-js": "^3.19.3",
+    "flowbite": "^1.5.3",
     "nuxt": "^2.15.8",
     "v-calendar": "^2.4.1",
     "vue": "^2.6.14",

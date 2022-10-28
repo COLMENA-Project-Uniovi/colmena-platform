@@ -43,6 +43,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/fontawesome.js',
+    {src:'~/plugins/flowbite.js', mode: 'client' },
     { src: '~plugins/vcalendar.js', ssr: false },
     { src: '~/plugins/apexcharts.js', mode: 'client' },
 

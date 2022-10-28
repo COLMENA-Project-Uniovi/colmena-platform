@@ -19,7 +19,7 @@
         <BarChart />
       </div>
 
-      <v-calendar></v-calendar>
+      <!-- <v-calendar></v-calendar> -->
 
       <div class="flex flex-col g-5 w-6/12 p-5">
         <h2 class="text-3xl font-bold text-gray-700">Proximas sesiones</h2>

@@ -28,7 +28,7 @@ export default {
 
 <style>
 body {
-  background-color: white;
+  background-color: #eff3f6;
 }
 
 .dark body {
