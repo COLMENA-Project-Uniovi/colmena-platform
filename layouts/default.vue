@@ -54,4 +54,9 @@ html,
 body {
   font-family: "Roboto", sans-serif;
 }
+
+.bg-white-colmena {
+  background-color: #eff3f6;
+
+}
 </style>
