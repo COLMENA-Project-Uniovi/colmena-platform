@@ -93,7 +93,7 @@ export default {
       login: '/login',
       logout: '/',
       callback: '/login',
-      home: '/private'
+      home: '/private/project-selection'
     },
     strategies: {
       local: {
