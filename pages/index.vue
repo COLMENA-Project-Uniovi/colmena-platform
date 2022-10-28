@@ -15,7 +15,7 @@
             transform="translate(100 100)" />
         </svg>
       </div>
-      <div class="container flex flex-wrap m-auto h-full z-10">
+      <div class="container flex flex-wrap m-auto h-full z-10 lg:p-10">
         <div class="basis-1/2 grow flex items-start justify-center flex-col gap-8 z-10">
           <h1 class="text-8xl font-bold">Conoce tus <br> errores de <br><span class="text-amber-500">programación</span>
           </h1>
