@@ -40,7 +40,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser"]),
+    ...mapGetters(["isAuthenticated", "loggedInUser", "getProject"]),
   },
   auth: true,
   transition: "home",
@@ -53,7 +53,7 @@ export default {
     };
   },
   async created() {
-    // const data = { id: this.$auth.user.id};
+    // const data = { id: this.getProject };
     const data = { id: 2 };
     const response = await this.$axios.post("academic/subjects/list.json", data);
     const responseJSON = await response;

@@ -8,7 +8,7 @@ export const getters = {
   },
 
   getProject(state) {
-    return state.project;
+    return localStorage.getItem('project');
   }
 }
 
@@ -18,6 +18,7 @@ export const state = () => ({
 
 export const mutations = {
   setProject(state, value) {
+    localStorage.setItem('project', value);
     state.project = value;
   }
 }

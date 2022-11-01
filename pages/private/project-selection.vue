@@ -30,8 +30,7 @@
         flex
         gap-2
         items-center">
-        <div class="nav-link bg-white h-14 w-14 flex items-center justify-center text-gray-500 cursor-pointer"
-          @click="selectProject(project.id)">
+        <div class="nav-link bg-white h-14 w-14 flex items-center justify-center text-gray-500 cursor-pointer">
           <font-awesome-icon icon="fa-solid fa-folder" class="text-xl icon" />
         </div>
         <p class="text-xl whitespace-nowrap opacity-0 transition-all duration-300 ease-in-out">{{ project.name }}</p>
@@ -68,7 +67,7 @@ export default {
     }),
     selectProject: function (value) {
       this.setProject(value);
-      this.$router.push('/private')
+      this.$router.push('/private');
     }
   }
 };
