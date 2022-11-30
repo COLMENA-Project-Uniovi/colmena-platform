@@ -1,37 +1,9 @@
 <template>
   <div
-    class="
-      nav-link
-      relative
-      bg-gray-200
-      h-10
-      w-10
-      flex
-      items-center
-      justify-center
-      cursor-pointer
-      text-gray-500
-      hover:text-yellow-500
-      duration-300
-      ease-in-out
-    "
-    v-on:click="changeTheme"
-  >
-    <font-awesome-icon
-      icon="fa-solid fa-cloud-moon"
-      class="text-xl"
-      ref="icon_dark"
-      v-if="theme == 'light'"
-    />
-    <font-awesome-icon
-      icon="fa-solid fa-sun"
-      class="text-l"
-      ref="icon_light"
-      v-else
-    />
-    <div class="tooltip">
-      Cambiar a tema {{ theme == "dark" ? "claro" : "oscuro" }}
-    </div>
+    class="relative flex items-center justify-center w-12 h-12 transition-all duration-500 ease-in-out bg-gray-100 cursor-pointer text-slate-500 hover:text-slate-700 rounded-3xl hover:bg-gray-50 hover:drop-shadow hover:rounded-xl group drop-shadow-xl"
+    v-on:click="changeTheme">
+    <font-awesome-icon icon="fa-solid fa-cloud-moon" class="text-xl" ref="icon_dark" v-if="theme == 'light'" />
+    <font-awesome-icon icon="fa-solid fa-sun" class="text-l" ref="icon_light" v-else />
   </div>
 </template>
 

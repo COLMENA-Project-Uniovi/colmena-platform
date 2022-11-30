@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="layout">
+    <div class="flex">
       <div class="left">
         <NavbarAuth />
+        <SideBar></SideBar>
       </div>
-
-      <div class="right">
+      <div class="w-full ml-[22rem] right bg-white">
         <nuxt />
       </div>
     </div>
@@ -23,20 +23,6 @@ export default {
   }),
 };
 </script>
-
-<style scoped>
-.layout {
-  display: flex;
-}
-
-.left {
-  width: 90px;
-}
-
-.right {
-  width: calc(100vw - 90px);
-}
-</style>
 
 <style>
 body {

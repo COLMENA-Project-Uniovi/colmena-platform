@@ -4,9 +4,9 @@
     <section class="section">
       <div class="w-full p-10 flex flex-col g-5">
         <h2 class="text-3xl font-bold text-gray-700">Asignaturas</h2>
-        <ul id="example-1" class="flex gap-5 mt-5 p-5">
+        <ul id="example-1" class="flex  mt-5 p-5 flex-wrap">
           <li
-            class="subject bg-white rounded-lg w-6/12 h-40 text-xl font-semibold p-9 cursor-pointer text-black duration-300 ease hover:bg-amber-500 hover:text-white"
+            class="subject bg-white rounded-lg w-1/3 h-40 text-xl font-semibold p-9 cursor-pointer text-black duration-300 ease hover:bg-amber-500 hover:text-white"
             v-for="item in subjects" v-bind:key="item.id" @click="$router.push(`/private/subjects/subject/${item.id}`)">
             <h2>{{ item.name }}</h2>
           </li>
@@ -40,7 +40,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser"]),
+    ...mapGetters(["isAuthenticated", "loggedInUser", "getProject"]),
   },
   auth: true,
   transition: "home",
@@ -53,7 +53,7 @@ export default {
     };
   },
   async created() {
-    // const data = { id: this.$auth.user.id};
+    // const data = { id: this.getProject };
     const data = { id: 2 };
     const response = await this.$axios.post("academic/subjects/list.json", data);
     const responseJSON = await response;

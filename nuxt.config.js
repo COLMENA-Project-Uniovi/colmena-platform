@@ -37,7 +37,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '@/assets/css/main.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,6 +46,7 @@ export default {
     '~/plugins/fontawesome.js',
     { src: '~plugins/vcalendar.js', ssr: false },
     { src: '~/plugins/apexcharts.js', mode: 'client' },
+    // { src: '~/plugins/flowbite.js', mode: 'client' },
 
   ],
 
@@ -56,8 +58,8 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode'
+    '@nuxt/postcss8',
+    // '@nuxtjs/color-mode'
   ],
 
   colorMode: {
@@ -74,7 +76,8 @@ export default {
   build: {
     postcss: {
       plugins: {
-        "postcss-custom-properties": false
+        tailwindcss: {},
+        autoprefixer: {},
       },
     },
   },
