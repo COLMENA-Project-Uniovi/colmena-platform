@@ -1,15 +1,15 @@
 <template>
-  <nav class="px-10 py-5 flex justify-between z-50">
-    <div class=" flex flex-wrap justify-between items-center w-full">
+  <nav class="fixed z-50 flex justify-between w-full px-10 py-5 bg-transparent">
+    <div class="flex flex-wrap items-center justify-between w-full ">
       <a href="/" class="flex items-center">
         <img
           src="~/assets/logos/logo-horizontal.svg"
-          class="mr-3 h-6 sm:h-12"
+          class="h-6 mr-3 sm:h-12"
           alt="Logo"
         />
       </a>
-      <div class="flex flex-row justify-between items-center">
-        <!-- <ul class="flex flex-row gap-5 content-center">
+      <div class="flex flex-row items-center justify-between">
+        <!-- <ul class="flex flex-row content-center gap-5">
           <li>
             <Link text="Inicio" type="terciary" />
           </li>
@@ -46,17 +46,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-nav {
-  background-color: transparent;
-  width: 100vw;
-  height: 100px;
-  transition: all 0.3s ease-in-out;
-  transition-delay: 0ms;
-}
-
-.dark nav {
-  background-color: tran;
-}
-</style>

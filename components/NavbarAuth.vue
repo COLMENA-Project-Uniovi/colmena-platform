@@ -1,27 +1,29 @@
 <template>
-	<nav class="py-5 h-full flex flex-col items-center justify-between">
-		<div class="flex flex-col justify-between items-center w-full gap-4">
-			<NuxtLink to="/private" class="
-          logo
-          nav-link
-          bg-gray-200
-          h-14
-          w-14
-          flex
-          items-center
-          justify-center
-          duration-300
-          ease-in-out
-        ">
-				<img src="~/assets/logos/logo-white.svg" alt="Logo" class="h-10 icon" />
-				<div class="tooltip">Inicio</div>
+	<nav
+		class="fixed top-0 left-0 flex flex-col items-center justify-between w-24 h-screen py-5 transition-all duration-300 ease-in-out bg-gray-100">
+		<div class="flex flex-col items-center justify-between w-full gap-4">
+			<NuxtLink to="/private"
+				class="relative flex items-center justify-center text-white transition-all duration-500 ease-in-out cursor-pointer bg-amber-500 w-14 h-14 rounded-3xl hover:bg-amber-600 hover:drop-shadow hover:rounded-xl group drop-shadow-xl">
+				<img src="~/assets/logos/logo-white.svg" alt="Logo"
+					class="h-10 text-xl transition duration-500 group-hover:scale-110" />
+				<div
+					class="absolute right-0 text-red-600 transition duration-500 translate-x-full -translate-y-1/2 bg-black opacity-0 -z-10 group-hover:opacity-100 group-hover:z-50 top-1/2">
+					Inicio
+				</div>
 			</NuxtLink>
 
 			<div v-for="(project, index) in projects" :key="index"
-				class="nav-link relative bg-gray-200 h-14 w-14 flex items-center justify-center text-gray-500 cursor-pointer"
+				class="relative flex items-center justify-center transition-all duration-500 ease-in-out bg-gray-100 cursor-pointer w-14 h-14 text-slate-500 hover:text-slate-700 rounded-3xl hover:bg-gray-50 hover:drop-shadow hover:rounded-xl group drop-shadow-xl"
 				@click="this.setProject(project.id)">
-				<font-awesome-icon icon="fa-solid fa-folder" class="text-xl icon" />
-				<div class="tooltip">{{ project.name }}</div>
+				<font-awesome-icon icon="fa-solid fa-folder"
+					class="text-xl transition duration-500 group-hover:scale-110" />
+				<!-- <div class="tooltip">{{ project.name }}</div> -->
+			</div>
+
+			<div
+				class="relative flex items-center justify-center transition-all duration-300 ease-in-out bg-gray-100 cursor-pointer text-slate-500 hover:text-slate-700 h-14 w-14 rounded-3xl hover:bg-gray-50 hover:shadow hover:rounded-xl group">
+				<font-awesome-icon icon="fa-solid fa-plus"
+					class="text-xl transition duration-500 group-hover:scale-110" />
 			</div>
 		</div>
 		<div class="flex flex-col gap-4 ">
@@ -56,22 +58,6 @@ export default {
 </script>
 
 <style>
-nav {
-	background-color: #eff3f6;
-	width: 90px;
-	height: 100vh;
-	position: fixed;
-	top: 0;
-	left: 0;
-	transition: all 0.3s ease-in-out;
-	transition-delay: 0ms;
-}
-
-.dark nav {
-	background-color: #303030;
-
-}
-
 .nav-link.logo {
 	background: rgb(245, 158, 11);
 	border-radius: 20px;
@@ -82,21 +68,9 @@ nav {
 	border-radius: 20px;
 }
 
-.nav-link {
-	background: #eff3f6;
-	border-radius: 50%;
-	box-shadow: -6px 6px 11px #cbcfd1, 6px -6px 11px #ffffff;
-	transition: all 0.3s ease-in-out;
-}
+.nav-link {}
 
-.dark .nav-link {
-	background-color: #303030;
-	box-shadow: -6px 6px 11px #292929, 6px -6px 11px #373737;
-}
-
-.nav-link:hover {
-	border-radius: 20px;
-}
+.nav-link:hover {}
 
 .nav-link .tooltip {
 	position: absolute;

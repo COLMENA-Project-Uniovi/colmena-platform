@@ -17,7 +17,7 @@
         ease-in-out
         overflow-hidden
         hover:w-80
-        hover:rounded-2xl" @click="selectProject(project.id)">
+        hover:rounded-2xl" @click="selectProject(JSON.stringify(project))">
       <div class="
         button-block-project
         absolute

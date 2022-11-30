@@ -67,11 +67,12 @@ export default {
 			try {
 				const { data } = await this.$auth.loginWith("local", {
 					data: {
-						username: "elmer.cortez@neozink.com",
+						username: "uo258585@uniovi.es",
 						password: "Pr43b4",
 					},
 				});
 				this.$auth.strategy.token.set(data);
+				this.$auth.$storage.setUniversal('user', data, true)
 				this.$auth.setUser(data);
 				this.$axios.setHeader('Authorization', data.id);
 			} catch (e) {
