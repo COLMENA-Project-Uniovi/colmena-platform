@@ -8,10 +8,10 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "yarn generate & node scripts/deploy.js",
-    "hooks:pre-commit": "node ./hooks/pre-commit.js"
+    "hooks:post-merge": "node ./hooks/post-merge.js"
   },
   "husky": {
-    "pre-commit": "npm run hooks:pre-commit"
+    "post-merge": "npm run hooks:post-merge"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

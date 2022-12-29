@@ -17,7 +17,7 @@
       </div>
       <div class="container z-10 flex flex-wrap h-full m-auto lg:p-10">
         <div class="z-10 flex flex-col items-start justify-center gap-8 basis-1/2 grow">
-          <h1 class="font-bold text-8xl">FEo tus <br> errores de <br><span class="text-amber-500">programación</span>
+          <h1 class="font-bold text-8xl">Hola tus <br> errores de <br><span class="text-amber-500">programación</span>
           </h1>
           <p class="text-lg leading-7 black">
             Colmena es una herramienta creada para monitorizar el rendimiento de los alumnos
