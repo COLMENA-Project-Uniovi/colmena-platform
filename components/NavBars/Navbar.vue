@@ -25,7 +25,7 @@
         </ul> -->
       </div>
       <div class="flex">
-        <Link text="Entrar" type="primary" href="/login" />
+        <!-- <Link text="Entrar" type="primary" href="/login" /> -->
       </div>
     </div>
   </nav>
