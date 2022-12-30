@@ -13,7 +13,7 @@
             usuarios tienen a su disposición información y métricas sobre el proceso de
             desarrollo software.
           </p>
-          <Link text="Únete" type="primary" href="/register" />
+          <nuxt-link :to="localePath('register')">{{ $t('register') }}</nuxt-link>
         </div>
         <div class="flex items-center justify-end basis-1/2 grow">
           <img src="~/assets/logos/logo.png" class="w-1/2" alt="Logo" />
@@ -31,18 +31,3 @@ export default {
   layout: "home",
 };
 </script>
-
-<style>
-
-.home-enter-active,
-.home-leave-active {
-  transition: all 0.5s;
-}
-
-.home-enter,
-.home-leave-active {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-
-</style>
