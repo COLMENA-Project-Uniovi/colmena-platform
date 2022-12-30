@@ -3,10 +3,12 @@
     <div class="flex">
       <div class="left">
         <AuthBar />
-        <SideBar></SideBar>
       </div>
-      <div class="w-full ml-[22rem] right bg-white">
-        <nuxt />
+      <div class="w-full ml-24 text-gray-700 bg-gray-50">
+        <TopBar></TopBar>
+        <div class="container">
+          <nuxt />
+        </div>
       </div>
     </div>
   </div>
