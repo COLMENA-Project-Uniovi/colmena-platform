@@ -2,7 +2,7 @@
 	<nav class="fixed top-0 left-0 z-10 flex flex-col items-center justify-between w-24 h-screen py-5 bg-gray-100 transition-base">
 		<div class="flex flex-col items-center justify-between w-full gap-4">
 			<NuxtLink to="/private"
-				class="relative flex items-center justify-center text-white transition-all duration-500 ease-in-out cursor-pointer bg-amber-500 w-14 h-14 rounded-3xl hover:bg-amber-600 hover:drop-shadow hover:rounded-xl group drop-shadow-xl">
+				class="relative flex items-center justify-center text-white transition-all duration-500 ease-in-out cursor-pointer bg-amber-500 w-14 h-14 rounded-3xl hover:bg-amber-500/95 hover:drop-shadow hover:rounded-xl group drop-shadow-xl">
 				<img src="~/assets/logos/logo-white.svg" alt="Logo" class="h-10 text-xl transition duration-500 group-hover:scale-110" />
 			</NuxtLink>
 

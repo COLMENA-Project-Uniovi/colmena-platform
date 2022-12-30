@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between px-6 py-3 ">
-        <div class="text-2xl font-bold">
+        <div class="text-xl font-bold">
             Inicio
         </div>
         <div class="flex items-center justify-center gap-2">

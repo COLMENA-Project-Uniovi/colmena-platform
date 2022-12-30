@@ -90,6 +90,9 @@ export default {
         en: {
           english: "English",
           spanish: "Spanish",
+          profile: "Profile",
+          logout: "Logout",
+          "app-language": "App language",
         },
         es: {
           english: "Inglés",
