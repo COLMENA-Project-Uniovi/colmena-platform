@@ -61,27 +61,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.subject {
-  background: #eff3f6;
-  box-shadow: -6px 6px 11px #cbcfd1, 6px -6px 11px #ffffff;
-}
-
-.home-enter-active,
-.home-leave-active {
-  transition: all 0.5s;
-}
-
-.home-enter,
-.home-leave-active {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-ul {
-  display: flex;
-}
-
-ul li {}
-</style>

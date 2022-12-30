@@ -17,24 +17,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.nav-link .tooltip {
-  transform: translateX(calc(100% + 40px)) scaleX(0);
-}
-
-.nav-link .in {
-  transition: all 0.1s ease-in-out;
-  transform: scale(0);
-}
-
-.nav-link .out {
-  transition: all 0.1s ease-in-out;
-  transform: scale(0);
-}
-
-.nav-link:hover .tooltip {
-  transform: translateX(calc(100% + 40px)) scaleX(1);
-}
-</style>
-
 
