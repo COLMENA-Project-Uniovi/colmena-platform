@@ -7,17 +7,3 @@
         </svg>
     </div>
 </template>
-
-<style>
-.blob2 {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    height: auto;
-    width: 1000px;
-    transform: translate(-10%, -50%);
-    filter: blur(55px);
-    opacity: 0.25;
-    z-index: 0;
-}
-</style>

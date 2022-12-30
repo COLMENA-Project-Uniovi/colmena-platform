@@ -2,7 +2,7 @@
   <div>
     <div class="flex">
       <div class="left">
-        <NavbarAuth />
+        <AuthBar />
         <SideBar></SideBar>
       </div>
       <div class="w-full ml-[22rem] right bg-white">

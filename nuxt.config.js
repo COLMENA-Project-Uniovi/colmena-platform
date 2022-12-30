@@ -39,6 +39,7 @@ export default {
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
     '@/assets/css/main.css',
+    '@/assets/css/style.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -54,8 +55,8 @@ export default {
   components: {
     dirs: [
       '~/components',
-      '~/components/Blobs',
-      '~/components/NavBars',
+      '~/components/blobs',
+      '~/components/nav-bars',
     ]
   },
 

@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="flex flex-col gap-4 ">
-			<AppDarkModeToggle />
+			<DarkToggle />
 			<Logout />
 		</div>
 	</nav>
@@ -32,70 +32,22 @@
 
 import { mapMutations } from "vuex";
 export default {
-	data() {
-		return {
-			projects: [],
-		};
-	},
-	async created() {
-		// const data = { id: this.$auth.user.id};
-		const data = { id: 2 };
-		const response = await this.$axios.post("academic/projects/list.json", data);
-		const responseJSON = await response;
-		this.projects = responseJSON.data;
-	},
-	methods: {
-		...mapMutations({
-			setProject: 'setProject'
-		}),
-	}
+    data() {
+        return {
+            projects: [],
+        };
+    },
+    async created() {
+        // const data = { id: this.$auth.user.id};
+        const data = { id: 2 };
+        const response = await this.$axios.post("academic/projects/list.json", data);
+        const responseJSON = await response;
+        this.projects = responseJSON.data;
+    },
+    methods: {
+        ...mapMutations({
+            setProject: "setProject"
+        }),
+    },
 };
 </script>
-
-<style>
-.nav-link.logo {
-	background: rgb(245, 158, 11);
-	border-radius: 20px;
-}
-
-.nav-link.logo:hover {
-	background: rgb(245, 158, 11);
-	border-radius: 20px;
-}
-
-.nav-link .icon {
-	color: rgb(107, 114, 128);
-	transition: all 0.6s ease-in-out;
-}
-
-.dark .nav-link .icon {
-	color: rgba(249, 250, 251);
-}
-
-.nav-link:hover .icon {
-	color: rgb(245, 158, 11);
-	animation: jump 0.6s ease-in-out;
-}
-
-@keyframes jump {
-	20% {
-		color: rgb(245, 158, 11);
-		transform: translateY(2px) scaleX(0.9);
-	}
-
-	50% {
-		color: rgb(245, 158, 11);
-		transform: translateY(-4px) scaleX(1.05);
-	}
-
-	70% {
-		color: rgb(245, 158, 11);
-		transform: translateY(1px) scaleX(1.05);
-	}
-
-	100% {
-		color: rgb(245, 158, 11);
-		transform: translateY(0) scaleX(1);
-	}
-}
-</style>
