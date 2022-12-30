@@ -35,11 +35,11 @@
             </div>
             <div class="flex flex-col gap-2 p-4 border-t">
                 <nuxt-link :to="localePath('private/profile')"
-                    class="flex items-center w-full gap-2 p-2 rounded-md transition-base hover:bg-gray-100">
+                    class="flex items-center w-full gap-2 p-2 text-xs font-bold rounded-md transition-base hover:bg-gray-100 ">
                     <font-awesome-icon icon="fa-solid fa-user" />
                     {{ $t('profile') }}
                 </nuxt-link>
-                <div class="flex items-center w-full gap-2 p-2 rounded-md cursor-pointer transition-base hover:bg-gray-100">
+                <div class="flex items-center w-full gap-2 p-2 text-xs font-bold rounded-md cursor-pointer transition-base hover:bg-gray-100 ">
                     <font-awesome-icon icon="fa-regular fa-arrow-up-left-from-circle" />
                     {{ $t('logout') }}
                 </div>
