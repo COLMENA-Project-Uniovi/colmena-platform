@@ -21,14 +21,6 @@
   z-index: 0;
 }
 
-.left {
-  width: 90px;
-}
-
-.right {
-  width: calc(100vw - 90px);
-}
-
 .nav-link.logo {
   background: rgb(245, 158, 11);
   border-radius: 20px;

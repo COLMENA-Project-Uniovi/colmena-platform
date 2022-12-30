@@ -3,9 +3,10 @@
     <div class="flex">
       <div class="left">
         <AuthBar />
-        <SideBar></SideBar>
+        <!-- <SideBar></SideBar> -->
       </div>
-      <div class="w-full ml-[22rem] right bg-white">
+      <div class="w-full ml-24 bg-gray-50 right">
+        <TopBar></TopBar>
         <nuxt />
       </div>
     </div>
