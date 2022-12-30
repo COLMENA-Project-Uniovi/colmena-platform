@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <Header title="Home" /> -->
-    <!-- <section class="section p-8">
+    <!-- <section class="p-8 section">
       <h2>{{ subject.name }}</h2>
       <p>Curso: {{ subject.year }}</p>
       <p>Desde el {{ subject.start_date }} hasta el {{ subject.end_date }}</p>
@@ -11,14 +11,14 @@
 
     <p>{{ subject.academical_year_id }}</p>
 
-    <div class="w-100 rounded-lg  px-6 py-4">
-      <div class="font-bold text-2xl">
+    <div class="px-6 py-4 rounded-lg w-100">
+      <div class="text-2xl font-bold">
         <p>{{ subject.name }}</p>
       </div>
     </div>
 
-    <div class="w-100 rounded-lg shadow-sm m-5 bg-neutral-50 px-6 py-4">
-      <p class="font-bold text-2xl">Descripción:</p>
+    <div class="px-6 py-4 m-5 rounded-lg shadow-sm w-100 bg-neutral-50">
+      <p class="text-2xl font-bold">Descripción:</p>
       <p>{{ subject.description }}</p>
     </div>
   </div>
@@ -53,18 +53,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.home-enter-active,
-.home-leave-active {
-  transition: all 0.5s;
-}
-
-.home-enter,
-.home-leave-active {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-ul {}
-</style>

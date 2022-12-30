@@ -1,8 +1,6 @@
 <template>
-
-
 	<aside
-		class="fixed top-0 left-0 w-64 h-screen ml-24 transition-all duration-300 ease-in-out border-l border-r border-gray-200 bg-gray-50"
+		class="fixed top-0 left-0 w-64 h-screen ml-24 border-l border-r border-gray-200 transition-base bg-gray-50"
 		aria-label="Sidebar">
 		<div class="flex flex-col justify-between h-full px-3 py-4 overflow-y-auto rounded dark:bg-gray-800">
 			<ul class="flex flex-col space-y-2">
