@@ -1,5 +1,5 @@
 <template>
-    <div class="relative ">
+    <div class="relative">
         <div class="flex items-center bg-white shadow cursor-pointer rounded-xl transition-base hover:shadow-md" @click="openMenu">
             <div
                 class="flex items-center justify-center w-10 h-10 shadow cursor-pointer transition-base bg-gradient-to-tr from-amber-500 to-amber-300 rounded-xl group">
@@ -39,7 +39,7 @@
                     <font-awesome-icon icon="fa-solid fa-user" />
                     {{ $t('profile') }}
                 </nuxt-link>
-                <div class="flex items-center w-full gap-2 p-2 text-xs font-bold rounded-md cursor-pointer transition-base hover:bg-gray-100 ">
+                <div class="flex items-center w-full gap-2 p-2 text-xs font-bold rounded-md cursor-pointer transition-base hover:bg-gray-100" @click="logout">
                     <font-awesome-icon icon="fa-regular fa-arrow-up-left-from-circle" />
                     {{ $t('logout') }}
                 </div>
@@ -103,6 +103,10 @@ export default {
             this.theme = localStorage.theme;
             document.documentElement.classList.add(localStorage.theme);
         },
+        async logout() {
+            await this.$auth.logout();
+            this.$router.push('login');
+        }
     }
 };
 </script>

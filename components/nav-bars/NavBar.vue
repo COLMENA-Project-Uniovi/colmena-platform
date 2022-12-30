@@ -6,8 +6,7 @@
       </a>
     </div>
     <div class="flex">
-      <nuxt-link :to="switchLocalePath('en')">{{ $t('english') }}</nuxt-link>
-      <nuxt-link :to="switchLocalePath('es')">{{ $t('spanish') }}</nuxt-link>
+      <Langs></Langs>
     </div>
   </nav>
 </template>
