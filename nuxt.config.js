@@ -52,13 +52,17 @@ export default {
     "~/plugins/i18n.js",
     { src: "~plugins/vcalendar.js", ssr: false },
     { src: "~/plugins/apexcharts.js", mode: "client" },
-    // { src: '~/plugins/flowbite.js', mode: 'client' },
-    
+    { src: "@/plugins/click-outside.js", ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
-    dirs: ["~/components", "~/components/blobs", "~/components/nav-bars"],
+    dirs: [
+      "~/components",
+      "~/components/blobs",
+      "~/components/nav-bars",
+      "~/components/top",
+    ],
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -78,21 +82,27 @@ export default {
   modules: ["@nuxtjs/axios", "@nuxtjs/auth-next", "@nuxtjs/i18n"],
 
   i18n: {
-    locales: ['en', 'es'],
-    defaultLocale: 'es',
+    locales: ["en", "es"],
+    defaultLocale: "es",
     vueI18n: {
-      fallbackLocale: 'es',
+      fallbackLocale: "es",
       messages: {
         en: {
-          english: 'English',
-          spanish: 'Spanish'
+          english: "English",
+          spanish: "Spanish",
+          profile: "Profile",
+          logout: "Logout",
+          "app-language": "App language",
         },
         es: {
-          english: 'Inglés',
-          spanish: 'Español'
-        }
-      }
-    }
+          english: "Inglés",
+          spanish: "Español",
+          profile: "Perfil",
+          logout: "Cerrar sesión",
+          "app-language": "Idioma de la aplicación",
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

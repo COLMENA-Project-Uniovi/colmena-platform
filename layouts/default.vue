@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <div class="flex">
-      <div class="left">
-        <AuthBar />
-        <SideBar></SideBar>
-      </div>
-      <div class="w-full ml-[22rem] right bg-white">
-        <nuxt />
-      </div>
+  <div class="flex w-full">
+    <AuthBar />
+    <TopBar></TopBar>
+    <div class="w-full mt-16 ml-24 text-gray-700 bg-gray-50">
+      <nuxt />
     </div>
   </div>
 </template>
