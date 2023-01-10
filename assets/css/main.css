@@ -21,9 +21,30 @@ body {
     @apply bg-amber-500 hover:bg-amber-600 focus:ring-amber-400;
   }
   .secondary {
-    @apply bg-slate-600 hover:bg-slate-700 focus:ring-slate-500;
+    @apply bg-[#617FC7] hover:bg-[#5172C1] focus:ring-[#829AD5];
   }
   .transition-base {
     @apply transition-all duration-300 ease-in-out;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 999px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

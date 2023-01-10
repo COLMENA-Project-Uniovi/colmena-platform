@@ -45,7 +45,9 @@
 				</form>
 			</div>
 		</div>
-		<div class="flex items-center justify-center w-2/3 bg-amber-300 "></div>
+		<div class="flex items-center justify-center w-2/3 overflow-hidden">
+			<img src="~/assets/img/login.jpg" class="w-full" />
+		</div>
 
 	</section>
 </template>
