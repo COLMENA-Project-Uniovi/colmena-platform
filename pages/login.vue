@@ -35,10 +35,10 @@
 					</div>
 
 					<div class="flex flex-col gap-2 mt-4">
-						<button class="w-full button primary" type="submit">
+						<button class="w-full button button-primary" type="submit">
 							Acceder
 						</button>
-						<NuxtLink to="/register" class="button secondary">
+						<NuxtLink to="/register" class="button button-secondary">
 							Registrar nueva cuenta
 						</NuxtLink>
 					</div>

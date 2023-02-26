@@ -2,7 +2,7 @@
     <div class="relative ">
         <div class="flex items-center bg-white shadow cursor-pointer rounded-xl transition-base hover:shadow-md" @click="openMenu">
             <div
-                class="flex items-center justify-center w-10 h-10 shadow cursor-pointer transition-base bg-gradient-to-tr from-blue-500 to-blue-300 rounded-xl group">
+                class="flex items-center justify-center w-10 h-10 shadow cursor-pointer transition-base bg-gradient-to-tr from-colmenablue-600 to-colmenablue-400 rounded-xl group">
                 <font-awesome-icon icon="fa-solid fa-globe" class="text-xl text-white transition-base group-hover:scale-110" />
             </div>
         </div>

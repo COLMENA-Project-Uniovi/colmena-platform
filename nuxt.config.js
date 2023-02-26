@@ -91,6 +91,7 @@ export default {
           english: "English",
           spanish: "Spanish",
           profile: "Profile",
+          login: "Login",
           logout: "Logout",
           "app-language": "App language",
         },
@@ -98,6 +99,7 @@ export default {
           english: "Inglés",
           spanish: "Español",
           profile: "Perfil",
+          login: "Iniciar sesión",
           logout: "Cerrar sesión",
           "app-language": "Idioma de la aplicación",
         },
@@ -123,7 +125,7 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    baseURL: "http://localhost/colmena-manager/api/1.0/",
+    baseURL: "https://dev.colmenaproject.es/admin/api/1.0/",
   },
 
   auth: {
