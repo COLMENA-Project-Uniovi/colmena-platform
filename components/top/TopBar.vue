@@ -4,11 +4,6 @@
             <div class="text-xl font-bold">
                 Inicio
             </div>
-            <div class="flex items-center justify-center gap-2">
-                <Langs></Langs>
-                <Calendar></Calendar>
-                <User></User>
-            </div>
         </div>
     </div>
 </template>

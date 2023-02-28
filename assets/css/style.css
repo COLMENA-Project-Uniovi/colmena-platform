@@ -67,27 +67,6 @@
   }
 }
 
-.button-terciary {
-  position: relative;
-}
-
-.button-terciary::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 0%;
-  height: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background-color: #f59e0b;
-  transition: all 0.3s ease-in-out;
-}
-
-.button-terciary:hover::after {
-  width: 100%;
-}
-
 .home-enter-active,
 .home-leave-active {
   transition: all 0.5s;
