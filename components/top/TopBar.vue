@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed top-0 left-0 w-full h-16 pl-24 transition-base bg-gray-50" :class="{ 'drop-shadow-sm': scroll > 50 }">
+    <div class="fixed top-0 left-0 flex items-center w-full h-16 pl-24 transition-base bg-gray-50" :class="{ 'drop-shadow-sm': scroll > 50 }">
         <div class="flex items-center justify-between w-full px-6 py-3 text-gray-700">
             <div class="text-xl font-bold">
                 Inicio

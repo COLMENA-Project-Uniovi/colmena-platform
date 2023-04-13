@@ -31,7 +31,8 @@
 				Próximas clases</p>
 			<div
 				class="flex flex-col items-center justify-center w-full gap-2">
-				<div
+				<nuxt-link v-for="index in [0, 1, 2]"
+					:to="localePath(`/private/subjects/subject/${index}`)"
 					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
 					<span
 						class="flex items-center justify-center w-10 h-10 text-white button-primary rounded-xl">
@@ -39,25 +40,7 @@
 					</span>
 					<span class="">Ingeniería de
 						Requisitos</span>
-				</div>
-				<div
-					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
-					<span
-						class="flex items-center justify-center w-10 h-10 text-white button-secondary rounded-xl">
-						10
-					</span>
-					<span class="">Ingeniería de
-						Requisitos</span>
-				</div>
-				<div
-					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
-					<span
-						class="flex items-center justify-center w-10 h-10 text-white button-terciary rounded-xl">
-						10
-					</span>
-					<span class="">Ingeniería de
-						Requisitos</span>
-				</div>
+				</nuxt-link>
 			</div>
 		</div>
 		<div
@@ -67,7 +50,8 @@
 				Últimas clases</p>
 			<div
 				class="flex flex-col items-center justify-center w-full gap-2">
-				<div
+				<nuxt-link v-for="index in [0, 1, 2]"
+					:to="localePath(`/private/subjects/subject/${index}`)"
 					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
 					<span
 						class="flex items-center justify-center w-10 h-10 text-white button-primary rounded-xl">
@@ -75,25 +59,7 @@
 					</span>
 					<span class="">Ingeniería de
 						Requisitos</span>
-				</div>
-				<div
-					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
-					<span
-						class="flex items-center justify-center w-10 h-10 text-white button-secondary rounded-xl">
-						10
-					</span>
-					<span class="">Ingeniería de
-						Requisitos</span>
-				</div>
-				<div
-					class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
-					<span
-						class="flex items-center justify-center w-10 h-10 text-white button-terciary rounded-xl">
-						10
-					</span>
-					<span class="">Ingeniería de
-						Requisitos</span>
-				</div>
+				</nuxt-link>
 			</div>
 		</div>
 	</div>
