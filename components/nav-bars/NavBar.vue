@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="flex gap-2">
-      <nuxt-link class="button button-primary" :to="localePath('login')">{{ $t('login') }}</nuxt-link>
+      <nuxt-link class="button button-primary" :to="localePath('/login')">{{ $t('login') }}</nuxt-link>
       <Langs></Langs>
     </div>
   </nav>
