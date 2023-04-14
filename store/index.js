@@ -14,11 +14,15 @@ export const getters = {
 
 export const state = () => ({
   project: null,
+  pageTitle: null
 })
 
 export const mutations = {
   setProject(state, value) {
     localStorage.setItem('project', value);
     state.project = value;
+  },
+  SET_PAGE_TITLE (state, title) {
+    state.pageTitle = title
   }
 }
