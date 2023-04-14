@@ -62,6 +62,7 @@ export default {
       "~/components/blobs",
       "~/components/nav-bars",
       "~/components/top",
+      "~/components/charts",
     ],
   },
 
