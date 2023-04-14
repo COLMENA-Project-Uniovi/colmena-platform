@@ -72,7 +72,6 @@ export default {
     "@nuxt/typescript-build",
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxt/postcss8",
-    // '@nuxtjs/color-mode'
   ],
 
   colorMode: {
