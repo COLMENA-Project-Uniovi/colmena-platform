@@ -27,6 +27,17 @@ module.exports = {
           800: '#846358',
           900: '#43302b',
         },
+        "c-tomato": "#d50000",
+        "c-pink": "#e67c73",
+        "c-tangerine": "#f4511e",
+        "c-yellow": "#f6bf26",
+        "c-emerald": "#33b679",
+        "c-green": "#0b8043",
+        "c-turquoise": "#039be5",
+        "c-blueberry": "#3f51b5",
+        "c-lavander": "#7986cb",
+        "c-purple": "#8e24aa",
+        "c-graphite": "#616161",
       }
     }
   }
