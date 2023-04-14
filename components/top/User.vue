@@ -21,7 +21,7 @@
                     class="text-sm font-semibold" />
             </div>
         </div>
-        <div class="absolute right-0 z-10 w-56 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-lg dark:bg-slate-700 transition-base -bottom-4 rounded-xl"
+        <div class="absolute right-0 z-10 w-56 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-xl dark:bg-slate-700 transition-base -bottom-4 rounded-xl"
             :class="{ 'max-h-0': !isOpen, 'max-h-64': isOpen, 'opacity-0': !isOpen }"
             v-click-outside="clickOutside">
             <div class="flex flex-col gap-2 p-4">

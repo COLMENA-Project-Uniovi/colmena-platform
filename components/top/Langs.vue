@@ -6,7 +6,7 @@
                 <font-awesome-icon icon="fa-solid fa-globe" class="text-xl text-white transition-base group-hover:scale-110" />
             </div>
         </div>
-        <div class="absolute right-0 z-10 w-56 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-lg dark:bg-slate-700 transition-base -bottom-4 rounded-xl"
+        <div class="absolute right-0 z-10 w-56 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-xl dark:bg-slate-700 transition-base -bottom-4 rounded-xl"
             v-click-outside="clickOutside" :class="{ 'max-h-0': !isOpen, 'max-h-64': isOpen, 'opacity-0': !isOpen }">
             <div class="flex flex-col gap-2 p-4">
                 <div class="text-xs font-bold ">
