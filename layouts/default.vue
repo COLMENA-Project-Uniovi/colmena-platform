@@ -2,7 +2,7 @@
   <div class="flex w-full">
     <AuthBar />
     <TopBar></TopBar>
-    <div class="w-10/12 mt-16 ml-24 text-gray-700 bg-gray-50">
+    <div class="w-10/12 min-h-screen pt-16 pl-24 text-gray-700 bg-gray-50">
       <nuxt />
     </div>
     <SideBar />
