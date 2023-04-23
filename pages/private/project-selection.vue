@@ -45,7 +45,8 @@ export default {
   },
   methods: {
     selectProject: function (value) {
-      this.$store.commit("setProject", JSON.parse(value))
+      console.log('JSON.parse(value) :>> ', value);
+      this.$store.commit("setProject", value)
       this.$router.push('/private');
     }
   }

@@ -6,7 +6,7 @@
             <div
                 class="flex items-center justify-between text-gray-700">
                 <h2 class="text-xl font-bold">
-                    {{ $store.state.project?.name }} |
+                    {{ project?.name }} |
                     {{ $store.state.pageTitle }}
                 </h2>
             </div>
@@ -21,5 +21,13 @@
 
 <script>
 export default {
+    data() {
+        return {
+            project: []
+        }
+    },
+    mounted() {
+        this.project = this.$store.getters.getProject
+    },
 }
 </script>
