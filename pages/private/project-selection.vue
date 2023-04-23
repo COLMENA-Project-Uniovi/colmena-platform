@@ -31,13 +31,13 @@ export default {
   },
   data: function () {
     return {
+      user: this.$auth.$storage.getUniversal("user"),
       projects: 0,
       projectSelected: null,
     };
   },
   async created() {
-    // const data = { id: this.$auth.user.id};
-    const data = { id: 2 };
+    const data = { id: this.user.id };
     const response = await this.$axios.post("academic/projects/list.json", data);
     const responseJSON = await response;
     let aux = responseJSON.data;
@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     selectProject: function (value) {
-      console.log('JSON.parse(value) :>> ', value);
       this.$store.commit("setProject", value)
       this.$router.push('/private');
     }
