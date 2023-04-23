@@ -6,6 +6,7 @@
             <div
                 class="flex items-center justify-between text-gray-700">
                 <h2 class="text-xl font-bold">
+                    {{ $store.state.project?.name }} |
                     {{ $store.state.pageTitle }}
                 </h2>
             </div>

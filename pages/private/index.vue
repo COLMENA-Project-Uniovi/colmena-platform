@@ -76,11 +76,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser", "getProject"]),
-  },
   auth: true,
   transition: "home",
   head() {
@@ -136,7 +132,7 @@ export default {
     this.subjects = this.subjects.concat(this.subjects);
   },
   mounted() {
-    this.$store.commit('SET_PAGE_TITLE', this.title)
+    this.$store.commit('setPageTitle', this.title)
   }
 };
 </script>

@@ -22,7 +22,7 @@ export const mutations = {
     localStorage.setItem('project', value);
     state.project = value;
   },
-  SET_PAGE_TITLE (state, title) {
+  setPageTitle (state, title) {
     state.pageTitle = title
   }
 }
