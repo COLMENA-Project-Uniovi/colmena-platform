@@ -10,68 +10,66 @@
       <p>Aquí podrás encontrar todo lo que necesitas
         para conocer tus errores de programación</p>
     </div>
-    <div
-      class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4">
       <h2 class="pl-5 text-2xl font-bold">Tus
         progresos</h2>
       <BarChart />
     </div>
-    <div
-    class="flex flex-col gap-4">
-    <h2 class="pl-5 text-2xl font-bold">Tus
-      asignaturas</h2>
-    <ul class="grid grid-cols-2 gap-4">
-      <li v-for="subject in subjects"
-        :key="subject.id">
-        <nuxt-link
-          :to="localePath(`/private/subjects/subject/${subject.id}`)"
-          class="flex flex-col items-center justify-center gap-2 p-4 text-white shadow-lg bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 rounded-xl transition-base hover:scale-105">
-          <div
-            class="flex items-end justify-start w-full gap-3">
-            <span
-              class="flex items-center justify-center w-16 h-16 text-xl font-bold rounded-lg bg-colmenablue-400">
-              {{ abbreviate(subject.name) }}
-            </span>
+    <div class="flex flex-col gap-4">
+      <h2 class="pl-5 text-2xl font-bold">Tus
+        asignaturas</h2>
+      <ul class="grid grid-cols-2 gap-4">
+        <li v-for="subject in subjects"
+          :key="subject.id">
+          <nuxt-link
+            :to="localePath(`/private/subjects/subject/${subject.id}`)"
+            class="flex flex-col items-center justify-center gap-2 p-4 text-white shadow-lg bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 rounded-xl transition-base hover:scale-105">
             <div
-              class="flex flex-col justify-between h-full py-1">
-              <span class="text-gray-200">
-                Semestre {{ subject.semester }}
-              </span>
+              class="flex items-end justify-start w-full gap-3">
               <span
-                class="text-lg font-semibold ">
-                {{ subject.name }}
+                class="flex items-center justify-center w-16 h-16 text-xl font-bold rounded-lg bg-colmenablue-400">
+                {{ abbreviate(subject.name) }}
+              </span>
+              <div
+                class="flex flex-col justify-between h-full py-1">
+                <span class="text-gray-200">
+                  Semestre {{ subject.semester }}
+                </span>
+                <span
+                  class="text-lg font-semibold ">
+                  {{ subject.name }}
+                </span>
+              </div>
+            </div>
+            <div
+              class="flex items-baseline justify-end w-full gap-1">
+              <span class="text-sm">
+                por
+              </span>
+              <span class="font-semibold">Carlos
+                Medina</span>
+            </div>
+            <div
+              class="flex items-center justify-center w-full gap-2 border-t-[1px] border-white/30 pt-4 font-semibold text-sm">
+              <span>
+                Sesiones
+              </span>
+              <div class="relative w-full">
+                <div
+                  class="absolute left-0 w-full h-3 -translate-y-1/2 bg-white top-50 rounded-xl opacity-50 z-[1]">
+                </div>
+                <div
+                  class="absolute left-0 w-[60%] h-3 -translate-y-1/2 bg-white top-50 rounded-tl-xl rounded-bl-xl z-[2]">
+                </div>
+              </div>
+              <span>
+                60%
               </span>
             </div>
-          </div>
-          <div
-            class="flex items-baseline justify-end w-full gap-1">
-            <span class="text-sm">
-              por
-            </span>
-            <span class="font-semibold">Carlos
-              Medina</span>
-          </div>
-          <div
-            class="flex items-center justify-center w-full gap-2 border-t-[1px] border-white/30 pt-4 font-semibold text-sm">
-            <span>
-              Sesiones
-            </span>
-            <div class="relative w-full">
-              <div
-                class="absolute left-0 w-full h-3 -translate-y-1/2 bg-white top-50 rounded-xl opacity-50 z-[1]">
-              </div>
-              <div
-                class="absolute left-0 w-[60%] h-3 -translate-y-1/2 bg-white top-50 rounded-tl-xl rounded-bl-xl z-[2]">
-              </div>
-            </div>
-            <span>
-              60%
-            </span>
-          </div>
-        </nuxt-link>
-      </li>
-    </ul>
-  </div>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -86,14 +84,12 @@ export default {
   },
   data: function () {
     return {
-      title: "Inicio | Colmena Project",
+      user: this.$auth.$storage.getUniversal("user"),
+      title: "Inicio",
       subjects: 0,
     };
   },
   computed: {
-    user() {
-      return this.$auth.$storage.getUniversal("user");
-    },
     welcomeMessage() {
       const hora = new Date().getHours();
       let saludo;
@@ -111,25 +107,33 @@ export default {
   },
   methods: {
     abbreviate(text) {
-      const palabras = text
-        .replace("de", "")
-        .replace("la", "")
-        .replace("lo", "")
-        .replace("le", "")
-        .replace("del", "")
-        .split(" ");
-      const iniciales = palabras.map(palabra => palabra.charAt(0));
-      return iniciales.join("");
+      if (text.length > 3) {
+        const palabras = text
+          .replace("de", "")
+          .replace("la", "")
+          .replace("lo", "")
+          .replace("le", "")
+          .replace("del", "")
+          .replace("a", "")
+          .split(" ");
+          if(palabras.length == 1){
+            let palabra = palabras[0];
+            return palabra.charAt(0).toUpperCase() + palabra.charAt(1).toUpperCase() + palabra.charAt(2).toUpperCase();
+          }else{
+            const iniciales = palabras.map(palabra => palabra.charAt(0).toUpperCase());
+            return iniciales.join("");
+          }
+      }
+      else {
+        return text.toUpperCase();
+      }
     }
   },
   async created() {
-    // const data = { id: this.getProject };
-    const data = { id: 2 };
+    const data = { id: this.$store.getters.getProject.id };
     const response = await this.$axios.post("academic/subjects/list.json", data);
     const responseJSON = await response;
     this.subjects = responseJSON.data;
-    this.subjects = this.subjects.concat(this.subjects);
-    this.subjects = this.subjects.concat(this.subjects);
   },
   mounted() {
     this.$store.commit('setPageTitle', this.title)

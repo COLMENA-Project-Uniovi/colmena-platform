@@ -15,11 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser"]),
-  },
   auth: false,
   transition: "home",
   head: {

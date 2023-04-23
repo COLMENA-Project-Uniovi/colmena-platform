@@ -8,7 +8,6 @@ export const getters = {
   },
 
   getProject(state) {
-    console.log('object :>> ', JSON.parse(localStorage.getItem('project')));
     return JSON.parse(localStorage.getItem('project'));
   }
 }

@@ -9,10 +9,10 @@
         {{ subject.name }}</h2>
     </div>
     <div class="flex flex-col col-start-1 col-end-3 gap-4">
-      <h2 class="pl-5 text-2xl font-bold">Tus
-        asignaturas</h2>
-      <ul class="grid grid-cols-2 gap-4">
-      </ul>
+      <h2 class="pl-5 text-2xl font-bold"> Descripción</h2>
+      <p>
+        {{ subject.description }}
+      </p>
     </div>
   </div>
 </template>
@@ -55,6 +55,7 @@ export default {
     );
     const responseJSON = await response;
     this.subject = responseJSON.data;
+    console.log(' this.subject  :>> ',  this.subject );
     this.$store.commit("setPageTitle", this.abbreviate((this.subject.name)))
   },
 };
