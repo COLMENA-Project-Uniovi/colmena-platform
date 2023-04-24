@@ -1,19 +1,67 @@
 <template>
   <div class="grid grid-cols-2 gap-8 px-10 py-8">
     <div
-      class="relative flex flex-col w-full col-start-1 col-end-3 gap-2 py-20 overflow-hidden text-white px-14 bg-gradient-to-tr from-amber-500 to-amber-300 rounded-xl">
+      class="relative flex flex-col w-full col-start-1 col-end-3 gap-2 py-20 overflow-hidden text-white shadow-sm px-14 bg-gradient-to-tr from-amber-500 to-amber-300 rounded-xl">
       <img src="~/assets/logos/logo-white.svg"
         alt="Logo"
         class="absolute right-0 h-full scale-105 translate-x-1/2 -translate-y-1/2 opacity-50 top-1/2" />
       <h2 class="text-4xl font-bold opacity-95">
         {{ subject.name }}</h2>
     </div>
-    <div class="flex flex-col col-start-1 col-end-3 gap-4">
-      <h2 class="pl-5 text-2xl font-bold"> Descripción</h2>
+    <div
+      class="relative flex flex-col w-full gap-2 py-10 bg-white shadow-sm px-14 rounded-xl">
+      <h2 class="text-2xl font-bold">
+        Descripción</h2>
       <p>
-        {{ subject.description }}
+        {{ subject.description }} {{
+          subject.description }}{{ subject.description
+  }}{{ subject.description }}{{
+  subject.description }}{{ subject.description
+  }}{{ subject.description }}{{
+  subject.description }}
       </p>
     </div>
+
+    <div
+      class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl">
+      <span
+        class="text-3xl font-bold text-white">Carlos
+        Medina Fernandez</span>
+      <span
+        class="font-bold text-gray-200">Profesor</span>
+    </div>
+
+    <div
+      class="relative flex items-center justify-center w-full overflow-hidden shadow-sm rounded-xl">
+      <v-calendar :attributes='attrs' expanded
+        :columns="2"
+        class="!w-full !border-none"></v-calendar>
+    </div>
+
+    <div
+      class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+      <p
+        class="w-full pl-2 font-semibold text-left">
+        Sesiones</p>
+      <div
+        class="flex flex-col items-center justify-center w-full gap-2">
+        <div v-for="session in subject.sessions"
+          class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
+          <span
+            class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl">
+            {{ getSessionDate(session) }}
+          </span>
+          <span
+            class="flex items-center justify-center h-10 px-2 text-white button-secondary rounded-xl">
+            {{ session.language_id == 1? 'Java': 'Otro' }}
+          </span>
+          <span class=""> {{ session.name }} </span>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </template>
 
@@ -29,25 +77,65 @@ export default {
   data: function () {
     return {
       title: "",
+      user: this.$auth.$storage.getUniversal("user"),
       subject: 0,
-      id: this.$route.params.subject
+      practice_group: 0,
+      id: this.$route.params.subject,
+      attrs: [
+        {
+          key: 'today',
+          highlight: {
+            class: 'bg-amber-500',
+            contentClass: 'text-white'
+          },
+          dates: new Date(),
+        },
+      ],
     };
   },
   methods: {
     abbreviate(text) {
-      const palabras = text
-        .replace("de", "")
-        .replace("la", "")
-        .replace("lo", "")
-        .replace("le", "")
-        .replace("del", "")
-        .split(" ");
-      const iniciales = palabras.map(palabra => palabra.charAt(0));
-      return iniciales.join("");
+      if (text.length > 3) {
+        const palabras = text
+          .replace("de", "")
+          .replace("la", "")
+          .replace("lo", "")
+          .replace("le", "")
+          .replace("del", "")
+          .replace("a", "")
+          .split(" ");
+        if (palabras.length == 1) {
+          let palabra = palabras[0];
+          return palabra.charAt(0).toUpperCase() + palabra.charAt(1).toUpperCase() + palabra.charAt(2).toUpperCase();
+        } else {
+          const iniciales = palabras.map(palabra => palabra.charAt(0).toUpperCase());
+          return iniciales.join("");
+        }
+      }
+      else {
+        return text.toUpperCase();
+      }
+    },
+    getSessionDate(session) {
+      const session_schedule = session.session_schedules.find(element => element.practice_group_id == this.practice_group)
+      console.log('session_schedule :>> ', session_schedule);
+      let date = new Date(Date.parse(session_schedule.date))
+      let start_hour = new Date(Date.parse(session_schedule.start_hour))
+      let end_hour = new Date(Date.parse(session_schedule.end_hour))
+      return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${start_hour.getHours()}:${start_hour.getMinutes()}-${end_hour.getHours()}:${end_hour.getMinutes()}`
     }
   },
   async created() {
-    // const data = { id: this.$auth.user.id};
+    // Get practice group
+    const user_id = { id: this.user.id };
+    // const practice_group_request = await this.$axios.post(
+    //   "academic/subjects/list_subject_by_id.json",
+    //   user_id
+    // );
+    // const practice_group_response = await practice_group_request;
+    // const practice_group = practice_group_response.data;
+    this.practice_group = 15;
+
     const data = { id: this.id };
     const response = await this.$axios.post(
       "academic/subjects/list_subject_by_id.json",
@@ -55,8 +143,23 @@ export default {
     );
     const responseJSON = await response;
     this.subject = responseJSON.data;
-    console.log(' this.subject  :>> ',  this.subject );
+    console.log(' this.subject  :>> ', this.subject);
     this.$store.commit("setPageTitle", this.abbreviate((this.subject.name)))
+
+    this.subject.sessions.forEach(session => {
+      session.session_schedules.forEach(session_schedule => {
+        if (session_schedule.practice_group_id == this.practice_group) {
+          const event = {
+            highlight: {
+              color: 'purple',
+              fillMode: 'light',
+            },
+            dates: Date.parse(session_schedule.date),
+          }
+          this.attrs.push(event)
+        }
+      })
+    });
   },
 };
 </script>

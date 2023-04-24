@@ -78,6 +78,16 @@
   transform: translateX(-100%);
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;

@@ -50,6 +50,7 @@ export default {
   plugins: [
     "~/plugins/fontawesome.js",
     "~/plugins/i18n.js",
+    "~/plugins/utils.js",
     { src: "~plugins/vcalendar.js", ssr: false },
     { src: "~/plugins/apexcharts.js", mode: "client" },
     { src: "@/plugins/click-outside.js", ssr: false },
