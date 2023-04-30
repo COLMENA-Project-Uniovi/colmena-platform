@@ -46,6 +46,7 @@ export default {
   methods: {
     selectProject: function (value) {
       this.$store.commit("setProject", value)
+      this.$store.commit("setPagePreTitle", JSON.parse(value).name)
       this.$router.push('/private');
     }
   }

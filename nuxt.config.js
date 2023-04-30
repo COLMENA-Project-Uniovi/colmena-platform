@@ -126,7 +126,7 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    baseURL: "http://localhost/colmena/api/1.0/",
+    baseURL: "http://localhost/colmena-manager/api/1.0/",
   },
 
   auth: {

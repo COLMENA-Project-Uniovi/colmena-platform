@@ -32,7 +32,7 @@
     </div>
 
     <div
-      class="relative flex items-center justify-center w-full overflow-hidden shadow-sm rounded-xl">
+      class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl">
       <v-calendar :attributes='attrs' expanded
         :columns="2"
         class="!w-full !border-none"></v-calendar>
@@ -45,7 +45,9 @@
         Sesiones</p>
       <div
         class="flex flex-col items-center justify-center w-full gap-2">
-        <div v-for="session in subject.sessions"
+        <nuxt-link
+          v-for="session in subject.sessions"
+          :to="localePath(`/private/sessions/session/${session.id}`)"
           class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
           <span
             class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl">
@@ -53,15 +55,13 @@
           </span>
           <span
             class="flex items-center justify-center h-10 px-2 text-white button-secondary rounded-xl">
-            {{ session.language_id == 1? 'Java': 'Otro' }}
+            {{ session.language_id == 1 ? 'Java' :
+              'Otro' }}
           </span>
           <span class=""> {{ session.name }} </span>
-        </div>
+        </nuxt-link>
       </div>
     </div>
-
-
-
   </div>
 </template>
 
@@ -117,8 +117,9 @@ export default {
       }
     },
     getSessionDate(session) {
-      const session_schedule = session.session_schedules.find(element => element.practice_group_id == this.practice_group)
-      console.log('session_schedule :>> ', session_schedule);
+      const groups = this.user.groups;
+      const groups_id = groups.map(group => group.id);
+      const session_schedule = session.session_schedules.find(element => groups_id.includes(element.practice_group_id))
       let date = new Date(Date.parse(session_schedule.date))
       let start_hour = new Date(Date.parse(session_schedule.start_hour))
       let end_hour = new Date(Date.parse(session_schedule.end_hour))
@@ -126,16 +127,6 @@ export default {
     }
   },
   async created() {
-    // Get practice group
-    const user_id = { id: this.user.id };
-    // const practice_group_request = await this.$axios.post(
-    //   "academic/subjects/list_subject_by_id.json",
-    //   user_id
-    // );
-    // const practice_group_response = await practice_group_request;
-    // const practice_group = practice_group_response.data;
-    this.practice_group = 15;
-
     const data = { id: this.id };
     const response = await this.$axios.post(
       "academic/subjects/list_subject_by_id.json",
@@ -143,12 +134,17 @@ export default {
     );
     const responseJSON = await response;
     this.subject = responseJSON.data;
-    console.log(' this.subject  :>> ', this.subject);
+    this.$store.commit("setSubject", JSON.stringify(this.subject))
     this.$store.commit("setPageTitle", this.abbreviate((this.subject.name)))
+
+    // Get practice group
+    const groups = this.user.groups;
+    const groups_id = groups.map(group => group.id);
 
     this.subject.sessions.forEach(session => {
       session.session_schedules.forEach(session_schedule => {
-        if (session_schedule.practice_group_id == this.practice_group) {
+        if (groups_id.includes(session_schedule.practice_group_id)) {
+          this.$store.commit("setGroup", session_schedule.practice_group_id)
           const event = {
             highlight: {
               color: 'purple',
