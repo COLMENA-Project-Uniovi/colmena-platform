@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-4 gap-8 px-10 py-8">
+    <div class="grid grid-cols-2 gap-8 px-10 py-8">
         <div
             class="relative flex flex-col w-full col-start-1 col-end-3 gap-2 py-20 overflow-hidden text-white shadow-sm px-14 bg-gradient-to-tr from-amber-500 to-amber-300 rounded-xl">
             <img src="~/assets/logos/logo-white.svg"
@@ -27,11 +27,38 @@
         </div>
 
         <div
-            class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl">
-            <v-calendar :attributes='attrs' expanded
-                :columns="2"
-                class="!w-full !border-none"></v-calendar>
+            class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+            <p
+                class="w-full pl-2 font-semibold text-left">
+                Compilaciones</p>
+            <div
+                class="flex flex-col items-center justify-center w-full gap-2">
+                <div v-for="compilation in session?.compilations"
+                    class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
+                    <span
+                        class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl">
+                        {{ compilation }}
+                    </span>
+                </div>
+            </div>
         </div>
+
+        <div
+        class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+        <p
+            class="w-full pl-2 font-semibold text-left">
+            Errores</p>
+        <div
+            class="flex flex-col items-center justify-center w-full gap-2">
+            <div v-for="marker in session?.markers"
+                class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm">
+                <span
+                    class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl">
+                    {{ marker }}
+                </span>
+            </div>
+        </div>
+    </div>
     </div>
 </template>
   
@@ -50,17 +77,8 @@ export default {
             user: this.$auth.$storage.getUniversal("user"),
             session: 0,
             sessions_scheduled: [],
-            attrs: [
-                {
-                    key: 'today',
-                    highlight: {
-                        class: 'bg-amber-500',
-                        contentClass: 'text-white'
-                    },
-                    dates: new Date(),
-                },
-            ],
             id: this.$route.params.session,
+            selected_compilation: 0
         };
     },
     methods: {
@@ -114,15 +132,7 @@ export default {
 
         this.session.session_schedules.forEach(session_schedule => {
             if (groups_id.includes(session_schedule.practice_group_id)) {
-                const event = {
-                    highlight: {
-                        color: 'purple',
-                        fillMode: 'light',
-                    },
-                    dates: Date.parse(session_schedule.date),
-                }
                 this.sessions_scheduled.push(session_schedule)
-                this.attrs.push(event)
             }
         })
     },
