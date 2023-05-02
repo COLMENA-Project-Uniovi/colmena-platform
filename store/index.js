@@ -16,6 +16,9 @@ export const getters = {
   getGroup(state) {
     return JSON.parse(localStorage.getItem('group'));
   },
+  getSupervisor(state) {
+    return JSON.parse(localStorage.getItem('supervisor'));
+  },
   getPreTitle(state) {
     return localStorage.getItem('pretitle');
   }
@@ -25,6 +28,7 @@ export const state = () => ({
   project: null,
   subject: null,
   group: null,
+  supervisor: null,
   pageTitle: null,
   pagePreTitle: null,
 })
@@ -41,6 +45,9 @@ export const mutations = {
   setGroup(state, value) {
     localStorage.setItem('group', value);
     state.group = value;
+  },
+  setSupervisor(state, value) {
+    localStorage.setItem('supervisor', value);
   },
   setPageTitle(state, title) {
     state.pageTitle = title

@@ -24,9 +24,9 @@
 
     <div
       class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl">
-      <span
-        class="text-3xl font-bold text-white">Carlos
-        Medina Fernandez</span>
+      <span class="text-3xl font-bold text-white">{{
+        supervisor.username }}
+      </span>
       <span
         class="font-bold text-gray-200">Profesor</span>
     </div>
@@ -79,7 +79,10 @@ export default {
       title: "",
       user: this.$auth.$storage.getUniversal("user"),
       subject: 0,
-      practice_group: 0,
+      group: 0,
+      supervisor: {
+        name: ''
+      },
       id: this.$route.params.subject,
       attrs: [
         {
@@ -116,6 +119,11 @@ export default {
         return text.toUpperCase();
       }
     },
+    getSupervisor(name) {
+      let palabras = name.split(".");
+      palabras = palabras.map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1)).join(" ");
+      return palabras;
+    },
     getSessionDate(session) {
       const groups = this.user.groups;
       const groups_id = groups.map(group => group.id);
@@ -145,6 +153,8 @@ export default {
       session.session_schedules.forEach(session_schedule => {
         if (groups_id.includes(session_schedule.practice_group_id)) {
           this.$store.commit("setGroup", session_schedule.practice_group_id)
+          session_schedule.practice_group.supervisor.username = this.getSupervisor(session_schedule.practice_group.supervisor.username)
+          this.$store.commit("setSupervisor", JSON.stringify(session_schedule.practice_group.supervisor))
           const event = {
             highlight: {
               color: 'purple',
@@ -156,6 +166,10 @@ export default {
         }
       })
     });
+  },
+  mounted() {
+    this.supervisor = this.$store.getters.getSupervisor;
+    this.group = this.$store.getters.getGroup;
   },
 };
 </script>
