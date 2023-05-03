@@ -9,7 +9,7 @@
         {{ subject.name }}</h2>
     </div>
     <div
-      class="relative flex flex-col w-full gap-2 py-10 bg-white shadow-sm px-14 rounded-xl">
+      class="relative flex flex-col w-full gap-2 p-10 bg-white shadow-sm rounded-xl">
       <h2 class="text-2xl font-bold">
         Descripción</h2>
       <p>
@@ -25,7 +25,7 @@
     <div
       class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl">
       <span class="text-3xl font-bold text-white">{{
-        supervisor.username }}
+        supervisor?.username }}
       </span>
       <span
         class="font-bold text-gray-200">Profesor</span>
@@ -33,8 +33,8 @@
 
     <div
       class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl">
-      <v-calendar :attributes='attrs' expanded
-        :columns="2"
+      <v-calendar :attributes='attrs'
+        :columns="1"
         class="!w-full !border-none"></v-calendar>
     </div>
 

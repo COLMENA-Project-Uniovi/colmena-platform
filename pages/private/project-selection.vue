@@ -40,8 +40,7 @@ export default {
     const data = { id: this.user.id };
     const response = await this.$axios.post("academic/projects/list.json", data);
     const responseJSON = await response;
-    let aux = responseJSON.data;
-    this.projects = aux.concat(responseJSON.data);
+    this.projects = responseJSON.data;
   },
   methods: {
     selectProject: function (value) {

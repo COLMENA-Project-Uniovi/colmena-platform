@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex items-center justify-center w-full overflow-hidden shadow-md rounded-xl">
+    <div class="relative flex items-center justify-center w-full shadow-md rounded-xl">
         <v-calendar :attributes='attrs' class="!w-full !border-none"></v-calendar>
     </div>
 </template>

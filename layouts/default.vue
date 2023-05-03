@@ -3,7 +3,7 @@
     <AuthBar />
     <TopBar></TopBar>
     <div
-      class="w-10/12 min-h-screen pt-16 pl-24 text-gray-700 bg-gray-50">
+      class="w-10/12 min-h-screen pt-16 pl-24 text-gray-700 md:w-9/12 bg-gray-50">
       <nuxt />
     </div>
     <SideBar />
