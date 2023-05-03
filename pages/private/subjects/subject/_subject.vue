@@ -77,7 +77,7 @@ export default {
       subject: 0,
       group: 0,
       supervisor: {
-        name: "",
+        username: "",
       },
       id: this.$route.params.subject,
       attrs: [
