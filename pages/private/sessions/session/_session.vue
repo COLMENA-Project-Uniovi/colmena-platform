@@ -72,9 +72,8 @@
             <span> Error: {{ marker.error_id }} </span>
           </div>
           <div class="flex">
-            "error_id": 45,
-            "line_number": 11,
-            "class_path": "C:/Users/borja/Documents/BORJA/TFG/runtime-EclipseApplication/test/src/test/TEST.java",
+            "error_id": 45, "line_number": 11, "class_path":
+            "C:/Users/borja/Documents/BORJA/TFG/runtime-EclipseApplication/test/src/test/TEST.java",
             "message": "Syntax error on token \".\", delete this token",
           </div>
           <textarea
