@@ -64,6 +64,8 @@ export default {
       "~/components/nav-bars",
       "~/components/top",
       "~/components/charts",
+      "~/components/filters",
+      "~/components/filters/markers",
     ],
   },
 
