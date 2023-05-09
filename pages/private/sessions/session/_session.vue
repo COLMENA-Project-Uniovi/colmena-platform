@@ -65,6 +65,7 @@
       <div class="flex items-center justify-between w-full px-2">
         <p class="w-full font-semibold text-left">Errores</p>
         <div class="flex items-center justify-center gap-2">
+          <FilterMarkers :markers="markers" :addFilter="addFilter" />
           <OrderMarkers :markers="markers" :addFilter="addFilter" />
           <div
             class="flex items-center justify-center w-6 h-6 rounded cursor-pointer hover:bg-white hover:shadow transition-base"
@@ -121,7 +122,8 @@
                   >Código</span
                 >
                 <span class="p-2 pl-3 text-sm"
-                  >// {{ `${marker.class_name}.java:${marker.line_number}` }}
+                  >//
+                  {{ `${marker.class_name}.java:${marker.line_number}` }}
                 </span>
                 <div class="p-2 pt-0">
                   <textarea

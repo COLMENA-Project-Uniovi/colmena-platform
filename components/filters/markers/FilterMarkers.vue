@@ -1,28 +1,39 @@
 <template>
   <div class="relative">
-    <di
+    <div
       class="flex items-center justify-center w-6 h-6 rounded cursor-pointer hover:bg-white hover:shadow transition-base"
+      :class="
+        selectedFamily !== null || selectedErrorType !== null ? 'bg-white shadow' : ''
+      "
       @click="openMenu"
     >
-      <font-awesome-icon icon="fa-solid fa-arrow-down-wide-short" class="text-sm" />
-    </di>
+      <font-awesome-icon icon="fa-solid fa-filter-list" class="text-sm" />
+    </div>
     <div
-      class="absolute right-0 z-10 w-56 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-xl dark:bg-slate-700 transition-base -bottom-4 rounded-xl"
+      class="absolute right-0 z-10 w-60 overflow-hidden text-sm text-gray-600 translate-y-full bg-white shadow-xl dark:bg-slate-700 transition-base -bottom-4 rounded-xl p-4 flex flex-col gap-4"
       v-click-outside="clickOutside"
       :class="{ 'max-h-0': !isOpen, 'max-h-64': isOpen, 'opacity-0': !isOpen }"
     >
-      <div class="flex flex-col gap-2 p-4">
+      <div class="flex flex-col gap-2">
         <div class="text-xs font-bold">Por familia de error</div>
-        <select class="w-full" name="type" v-model="selectedFamily">
+        <select
+          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none"
+          name="type"
+          v-model="selectedFamily"
+        >
           <option :value="null" selected>Ninguno</option>
           <option :value="id" v-for="(name, id) in families">
             {{ name }}
           </option>
         </select>
       </div>
-      <div class="flex flex-col gap-2 p-4">
+      <div class="flex flex-col gap-2">
         <div class="text-xs font-bold">Por tipo de error</div>
-        <select class="w-full" name="type" v-model="selectedErrorType">
+        <select
+          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none"
+          name="type"
+          v-model="selectedErrorType"
+        >
           <option :value="null" selected>Ninguno</option>
           <option :value="id" v-for="(name, id) in errorTypes">
             {{ name }}
