@@ -66,17 +66,12 @@
         <p class="w-full font-semibold text-left">Errores</p>
         <div class="flex items-center justify-center gap-2">
           <FilterMarkers :markers="markers" :addFilter="addFilter" />
-          <OrderMarkers :markers="markers" :addFilter="addFilter" />
-          <div
-            class="flex items-center justify-center w-6 h-6 rounded cursor-pointer hover:bg-white hover:shadow transition-base"
-          >
-            <font-awesome-icon icon="fa-solid fa-arrow-down-wide-short" class="text-sm" />
-          </div>
+          <OrderMarkers :markers="markers" :addOrder="addOrder" />
         </div>
       </div>
       <div class="flex flex-col items-center justify-center w-full gap-2" markers>
         <div
-          v-for="marker in this.filter(markers)"
+          v-for="marker in this.orderMarkers(this.filter(markers))"
           class="flex flex-col w-full gap-2 font-semibold shadow-md bg-gray-50 transition-base rounded-xl h-fit"
           :data-error-id="marker.id"
         >
@@ -163,6 +158,10 @@ export default {
         family: null,
         type: null,
       },
+      order: {
+        by: null,
+        asc: false,
+      },
       markers: [],
       sessions_scheduled: [],
       id: this.$route.params.session,
@@ -244,6 +243,22 @@ export default {
       });
 
       return marcadores;
+    },
+    addOrder(by, asc) {
+      this.order.by = by;
+      this.order.asc = asc;
+    },
+    orderMarkers(markers) {
+      markers.sort((a, b) => {
+        if (a.error[this.order.by] < b.error[this.order.by]) {
+          return this.order.asc === true ? -1 : 1;
+        }
+        if (a.error[this.order.by] > b.error[this.order.by]) {
+          return this.order.asc === true ? 1 : -1;
+        }
+        return 0;
+      });
+      return markers;
     },
   },
   async created() {
