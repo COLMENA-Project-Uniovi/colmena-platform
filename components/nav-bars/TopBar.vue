@@ -12,9 +12,9 @@
       <div class="flex items-center justify-between gap-2 text-gray-700">
         <transition name="fade">
           <div
+            v-if="$store.state.pageTitle !== 'Inicio'"
             class="flex items-center text-white bg-white shadow cursor-pointer rounded-xl transition-base hover:shadow-md"
             @click="goBack"
-            v-if="$store.state.pageTitle !== 'Inicio'"
           >
             <div
               class="flex items-center justify-center h-10 gap-1 px-2 shadow cursor-pointer transition-base bg-gradient-to-tr from-colmenablue-600 to-colmenablue-400 rounded-xl group"
@@ -27,8 +27,8 @@
             </div>
           </div>
         </transition>
-        <Langs></Langs>
-        <User></User>
+        <LangsSidebar />
+        <UserSidebar />
       </div>
     </div>
   </div>
@@ -39,17 +39,17 @@ export default {
   data() {
     return {
       project: [],
-      preTitle: "",
-    };
+      preTitle: '',
+    }
+  },
+  mounted() {
+    this.project = this.$store.getters.getProject
+    this.preTitle = this.$store.getters.getPreTitle
   },
   methods: {
     goBack() {
-      history.back();
+      history.back()
     },
   },
-  mounted() {
-    this.project = this.$store.getters.getProject;
-    this.preTitle = this.$store.getters.getPreTitle;
-  },
-};
+}
 </script>

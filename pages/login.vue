@@ -4,15 +4,21 @@
       <div class="flex flex-col items-center justify-center w-8/12 gap-6">
         <h2 class="w-full text-3xl font-bold">¡Bienvenido/a!</h2>
 
-        <form method="post" @submit.prevent="login" class="flex flex-col w-full gap-4">
+        <form
+          method="post"
+          class="flex flex-col w-full gap-4"
+          @submit.prevent="login"
+        >
           <div class="flex flex-col w-full gap-1">
-            <div class="text-sm font-bold tracking-wide text-gray-700">Email</div>
+            <div class="text-sm font-bold tracking-wide text-gray-700">
+              Email
+            </div>
             <input
+              v-model="email"
               class="w-full px-4 py-2 text-sm font-semibold tracking-wide text-gray-600 bg-gray-100 border border-gray-100 rounded-lg outline-none transition-base hover:border-gray-200 focus:border-amber-500"
               type=""
               placeholder="tu@madre.com"
               name="email"
-              v-model="email"
             />
           </div>
 
@@ -29,11 +35,11 @@
             </div>
             <div class="relative group">
               <input
+                v-model="password"
                 class="w-full px-4 py-2 text-sm font-semibold tracking-wide text-gray-600 bg-gray-100 border border-gray-100 rounded-lg outline-none transition-base group-hover:border-gray-200 focus:border-amber-500"
                 :type="isShowPassword"
                 placeholder="Ej. borjalachupa69"
                 name="password"
-                v-model="password"
               />
               <font-awesome-icon
                 icon="fa-solid fa-eye"
@@ -48,9 +54,9 @@
               Iniciar sesión como
             </div>
             <select
+              v-model="type"
               class="w-full px-4 py-2 text-sm font-semibold tracking-wide text-gray-600 bg-gray-100 border border-gray-100 rounded-lg outline-none transition-base hover:border-gray-200 focus:border-amber-500"
               name="type"
-              v-model="type"
             >
               <option value="student">Estudiante</option>
               <option value="teacher">Profesor</option>
@@ -58,7 +64,9 @@
           </div>
 
           <div class="flex flex-col gap-2 mt-4">
-            <button class="w-full button button-primary" type="submit">Acceder</button>
+            <button class="w-full button button-primary" type="submit">
+              Acceder
+            </button>
             <NuxtLink to="/register" class="button button-secondary">
               Registrar nueva cuenta
             </NuxtLink>
@@ -74,48 +82,49 @@
 
 <script>
 export default {
-  layout: "home",
+  layout: 'home',
   data() {
     return {
-      email: "uo258585@uniovi.es",
-      password: "C0lm3n4",
-      type: "student",
+      email: 'uo258585@uniovi.es',
+      password: 'C0lm3n4',
+      type: 'student',
       error: null,
-      isShowPassword: "password",
-    };
+      isShowPassword: 'password',
+    }
   },
   watch: {
     type(newType, oldType) {
-      if (newType == "student") {
-        this.email = "uo258585@uniovi.es";
-        this.password = "C0lm3n4";
+      if (newType === 'student') {
+        this.email = 'uo258585@uniovi.es'
+        this.password = 'C0lm3n4'
       } else {
-        this.email = "borja.rodriguez";
-        this.password = "C0lm3n4";
+        this.email = 'borja.rodriguez'
+        this.password = 'C0lm3n4'
       }
     },
   },
   methods: {
     showPassword() {
-      this.isShowPassword = this.isShowPassword == "password" ? "text" : "password";
+      this.isShowPassword =
+        this.isShowPassword === 'password' ? 'text' : 'password'
     },
     async login() {
       try {
-        const { data } = await this.$auth.loginWith("local", {
+        const { data } = await this.$auth.loginWith('local', {
           data: {
             username: this.email,
             password: this.password,
             type: this.type,
           },
-        });
-        this.$auth.strategy.token.set(data);
-        this.$auth.$storage.setUniversal("user", data, true);
-        this.$auth.setUser(data);
-        this.$axios.setHeader("Authorization", data.id);
+        })
+        this.$auth.strategy.token.set(data)
+        this.$auth.$storage.setUniversal('user', data, true)
+        this.$auth.setUser(data)
+        this.$axios.setHeader('Authorization', data.id)
       } catch (e) {
-        console.log(e.response.data.message);
+        console.log(e.response.data.message)
       }
     },
   },
-};
+}
 </script>

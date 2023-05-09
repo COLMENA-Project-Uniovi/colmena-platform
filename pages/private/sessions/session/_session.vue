@@ -24,15 +24,20 @@
     <div
       class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl"
     >
-      <span class="text-3xl font-bold text-white">{{ supervisor?.username }} </span>
+      <span class="text-3xl font-bold text-white"
+        >{{ supervisor?.username }}
+      </span>
       <span class="font-bold text-gray-200">Profesor</span>
     </div>
 
-    <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+    <div
+      class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
+    >
       <p class="w-full pl-2 font-semibold text-left">Compilaciones</p>
       <div class="flex flex-col items-center justify-center w-full gap-2">
         <div
           v-for="compilation in session?.compilations"
+          :key="compilation.id"
           class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm"
         >
           <div
@@ -61,17 +66,23 @@
       </div>
     </div>
 
-    <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+    <div
+      class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
+    >
       <div class="flex items-center justify-between w-full px-2">
         <p class="w-full font-semibold text-left">Errores</p>
         <div class="flex items-center justify-center gap-2">
-          <FilterMarkers :markers="markers" :addFilter="addFilter" />
-          <OrderMarkers :markers="markers" :addOrder="addOrder" />
+          <FilterMarkers :markers="markers" :add-filter="addFilter" />
+          <OrderMarkers :markers="markers" :add-order="addOrder" />
         </div>
       </div>
-      <div class="flex flex-col items-center justify-center w-full gap-2" markers>
+      <div
+        class="flex flex-col items-center justify-center w-full gap-2"
+        markers
+      >
         <div
-          v-for="marker in this.orderMarkers(this.filter(markers))"
+          v-for="marker in orderMarkers(filter(markers))"
+          :key="marker.id"
           class="flex flex-col w-full gap-2 font-semibold shadow-md bg-gray-50 transition-base rounded-xl h-fit"
           :data-error-id="marker.id"
         >
@@ -109,7 +120,9 @@
                   class="w-full p-2 text-xl font-bold bg-white rounded-lg border-[1px] border-gray-100"
                   >Descripción</span
                 >
-                <span class="p-2 pl-3 text-sm"> {{ marker.error.message }} </span>
+                <span class="p-2 pl-3 text-sm">
+                  {{ marker.error.message }}
+                </span>
               </div>
               <div class="flex flex-col rounded-lg shadow-sm">
                 <span
@@ -140,19 +153,14 @@
 <script>
 export default {
   auth: true,
-  transition: "home",
-  head() {
-    return {
-      title: this.title,
-    };
-  },
+  transition: 'home',
   data: function () {
     return {
-      title: "",
-      user: this.$auth.$storage.getUniversal("user"),
+      title: '',
+      user: this.$auth.$storage.getUniversal('user'),
       session: 0,
       supervisor: {
-        username: "",
+        username: '',
       },
       filters: {
         family: null,
@@ -166,127 +174,139 @@ export default {
       sessions_scheduled: [],
       id: this.$route.params.session,
       selected_compilation: 0,
-    };
+    }
+  },
+  head() {
+    return {
+      title: this.title,
+    }
+  },
+  async created() {
+    const data = { id: this.id }
+    const response = await this.$axios.post(
+      'academic/subjects/get_session.json',
+      data
+    )
+    const responseJSON = await response
+    this.session = responseJSON.data
+    this.$store.commit('setPageTitle', this.session.name)
+    this.$store.commit(
+      'setPagePreTitle',
+      this.abbreviate(this.$store.getters.getSubject.name)
+    )
+
+    // Get practice group
+    const groups = this.user.groups
+    const groupsId = groups.map((group) => group.id)
+
+    this.session.session_schedules.forEach((sessionSchedule) => {
+      if (groupsId.includes(sessionSchedule.practice_group_id)) {
+        this.sessions_scheduled.push(sessionSchedule)
+      }
+    })
+
+    this.markers = this.session.markers
+  },
+  mounted() {
+    this.supervisor = this.$store.getters.getSupervisor
+    this.group = this.$store.getters.getGroup
   },
   methods: {
     abbreviate(text) {
       if (text.length > 3) {
         const palabras = text
-          .replace("de", "")
-          .replace("la", "")
-          .replace("lo", "")
-          .replace("le", "")
-          .replace("del", "")
-          .replace("a", "")
-          .split(" ");
-        if (palabras.length == 1) {
-          let palabra = palabras[0];
+          .replace('de', '')
+          .replace('la', '')
+          .replace('lo', '')
+          .replace('le', '')
+          .replace('del', '')
+          .replace('a', '')
+          .split(' ')
+        if (palabras.length === 1) {
+          const palabra = palabras[0]
           return (
             palabra.charAt(0).toUpperCase() +
             palabra.charAt(1).toUpperCase() +
             palabra.charAt(2).toUpperCase()
-          );
+          )
         } else {
-          const iniciales = palabras.map((palabra) => palabra.charAt(0).toUpperCase());
-          return iniciales.join("");
+          const iniciales = palabras.map((palabra) =>
+            palabra.charAt(0).toUpperCase()
+          )
+          return iniciales.join('')
         }
       } else {
-        return text.toUpperCase();
+        return text.toUpperCase()
       }
     },
     getSessionDate(session) {
-      const groups = this.user.groups;
-      const groups_id = groups.map((group) => group.id);
-      const session_schedule = session.session_schedules.find((element) =>
-        groups_id.includes(element.practice_group_id)
-      );
-      let date = new Date(Date.parse(session_schedule.date));
-      let start_hour = new Date(Date.parse(session_schedule.start_hour));
-      let end_hour = new Date(Date.parse(session_schedule.end_hour));
-      return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${start_hour.getHours()}:${start_hour.getMinutes()}-${end_hour.getHours()}:${end_hour.getMinutes()}`;
+      const groups = this.user.groups
+      const groupsId = groups.map((group) => group.id)
+      const sessionSchedule = session.session_schedules.find((element) =>
+        groupsId.includes(element.practice_group_id)
+      )
+      const date = new Date(Date.parse(sessionSchedule.date))
+      const startHour = new Date(Date.parse(sessionSchedule.start_hour))
+      const endHour = new Date(Date.parse(sessionSchedule.end_hour))
+      return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${startHour.getHours()}:${startHour.getMinutes()}-${endHour.getHours()}:${endHour.getMinutes()}`
     },
     expandError(id) {
-      const marker_info = document.querySelector(`[data-error-id="${id}"] [marker-info]`);
-      marker_info.classList.toggle("hidden");
-      //rotar marker-arrow 180 grados
-      const marker_arrow = document.querySelector(
+      const markerInfo = document.querySelector(
+        `[data-error-id="${id}"] [marker-info]`
+      )
+      markerInfo.classList.toggle('hidden')
+      // rotar marker-arrow 180 grados
+      const markerArrow = document.querySelector(
         `[data-error-id="${id}"] [marker-arrow]`
-      );
-      marker_arrow.classList.toggle("rotate-180");
+      )
+      markerArrow.classList.toggle('rotate-180')
     },
     addFilter(family, type) {
-      this.filters.family = family;
-      this.filters.type = type;
+      this.filters.family = family
+      this.filters.type = type
     },
     filter(markers) {
-      let marcadores = markers.filter((marker) => {
+      const marcadores = markers.filter((marker) => {
         if (this.filters.family !== null && this.filters.type !== null) {
           return (
-            marker.error.error_id == this.filters.type &&
-            marker.error.family_id == this.filters.family
-          );
+            marker.error.error_id === this.filters.type &&
+            marker.error.family_id === this.filters.family
+          )
         }
 
         if (this.filters.family !== null && this.filters.type == null) {
-          return marker.error.family_id == this.filters.family;
+          return marker.error.family_id === this.filters.family
         }
 
         if (this.filters.family == null && this.filters.type !== null) {
-          return marker.error.error_id == this.filters.type;
+          return marker.error.error_id === this.filters.type
         }
 
         if (this.filters.family == null && this.filters.type == null) {
-          return true;
+          return true
         }
 
-        return false;
-      });
+        return false
+      })
 
-      return marcadores;
+      return marcadores
     },
     addOrder(by, asc) {
-      this.order.by = by;
-      this.order.asc = asc;
+      this.order.by = by
+      this.order.asc = asc
     },
     orderMarkers(markers) {
       markers.sort((a, b) => {
         if (a.error[this.order.by] < b.error[this.order.by]) {
-          return this.order.asc === true ? -1 : 1;
+          return this.order.asc === true ? -1 : 1
         }
         if (a.error[this.order.by] > b.error[this.order.by]) {
-          return this.order.asc === true ? 1 : -1;
+          return this.order.asc === true ? 1 : -1
         }
-        return 0;
-      });
-      return markers;
+        return 0
+      })
+      return markers
     },
   },
-  async created() {
-    const data = { id: this.id };
-    const response = await this.$axios.post("academic/subjects/get_session.json", data);
-    const responseJSON = await response;
-    this.session = responseJSON.data;
-    this.$store.commit("setPageTitle", this.session.name);
-    this.$store.commit(
-      "setPagePreTitle",
-      this.abbreviate(this.$store.getters.getSubject.name)
-    );
-
-    // Get practice group
-    const groups = this.user.groups;
-    const groups_id = groups.map((group) => group.id);
-
-    this.session.session_schedules.forEach((session_schedule) => {
-      if (groups_id.includes(session_schedule.practice_group_id)) {
-        this.sessions_scheduled.push(session_schedule);
-      }
-    });
-
-    this.markers = this.session.markers;
-  },
-  mounted() {
-    this.supervisor = this.$store.getters.getSupervisor;
-    this.group = this.$store.getters.getGroup;
-  },
-};
+}
 </script>

@@ -5,11 +5,9 @@
       <div class="content">
         <p>
           <strong>Username:</strong>
-          {{ loggedInUser.username }}
         </p>
         <p>
           <strong>Email:</strong>
-          {{ loggedInUser.email }}
         </p>
       </div>
     </div>
@@ -17,10 +15,5 @@
 </template>
 
 <script>
-
-export default {
-  computed: {
-    ...mapGetters(["loggedInUser"]),
-  },
-};
+export default {}
 </script>
