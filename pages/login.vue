@@ -77,14 +77,24 @@ export default {
   layout: "home",
   data() {
     return {
-      email: "",
-      password: "",
+      email: "uo258585@uniovi.es",
+      password: "C0lm3n4",
       type: "student",
       error: null,
       isShowPassword: "password",
     };
   },
-
+  watch: {
+    type(newType, oldType) {
+      if (newType == "student") {
+        this.email = "uo258585@uniovi.es";
+        this.password = "C0lm3n4";
+      } else {
+        this.email = "borja.rodriguez";
+        this.password = "C0lm3n4";
+      }
+    },
+  },
   methods: {
     showPassword() {
       this.isShowPassword = this.isShowPassword == "password" ? "text" : "password";
@@ -93,8 +103,8 @@ export default {
       try {
         const { data } = await this.$auth.loginWith("local", {
           data: {
-            username: "uo258585@uniovi.es",
-            password: "C0lm3n4",
+            username: this.email,
+            password: this.password,
             type: this.type,
           },
         });
