@@ -30,7 +30,7 @@
               <span
                 class="flex items-center justify-center w-16 h-16 text-xl font-bold rounded-lg bg-colmenablue-400"
               >
-                {{ abbreviate(subject.name) }}
+                {{ $abbreviate(subject.name) }}
               </span>
               <div class="flex flex-col justify-between h-full py-1">
                 <span class="text-gray-200">
@@ -105,34 +105,6 @@ export default {
   mounted() {
     this.$store.commit('setPageTitle', this.title)
   },
-  methods: {
-    abbreviate(text) {
-      if (text.length > 3) {
-        const palabras = text
-          .replace('de', '')
-          .replace('la', '')
-          .replace('lo', '')
-          .replace('le', '')
-          .replace('del', '')
-          .replace('a', '')
-          .split(' ')
-        if (palabras.length === 1) {
-          const palabra = palabras[0]
-          return (
-            palabra.charAt(0).toUpperCase() +
-            palabra.charAt(1).toUpperCase() +
-            palabra.charAt(2).toUpperCase()
-          )
-        } else {
-          const iniciales = palabras.map((palabra) =>
-            palabra.charAt(0).toUpperCase()
-          )
-          return iniciales.join('')
-        }
-      } else {
-        return text.toUpperCase()
-      }
-    },
-  },
+  methods: {},
 }
 </script>

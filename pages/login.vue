@@ -117,6 +117,7 @@ export default {
             type: this.type,
           },
         })
+        data.level = this.type
         this.$auth.strategy.token.set(data)
         this.$auth.$storage.setUniversal('user', data, true)
         this.$auth.setUser(data)

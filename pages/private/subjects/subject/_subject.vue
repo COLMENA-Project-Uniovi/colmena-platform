@@ -108,7 +108,7 @@ export default {
     const responseJSON = await response
     this.subject = responseJSON.data
     this.$store.commit('setSubject', JSON.stringify(this.subject))
-    this.$store.commit('setPageTitle', this.abbreviate(this.subject.name))
+    this.$store.commit('setPageTitle', this.$abbreviate(this.subject.name))
 
     // Get practice group
     const groups = this.user.groups
@@ -118,7 +118,6 @@ export default {
       session.session_schedules.forEach((sessionSchedule) => {
         if (groupsId.includes(sessionSchedule.practice_group_id)) {
           this.$store.commit('setGroup', sessionSchedule.practice_group_id)
-          console.log(sessionSchedule)
           sessionSchedule.practice_group.supervisor.username =
             this.getSupervisor(
               sessionSchedule.practice_group.supervisor.username
@@ -144,33 +143,6 @@ export default {
     this.group = this.$store.getters.getGroup
   },
   methods: {
-    abbreviate(text) {
-      if (text.length > 3) {
-        const palabras = text
-          .replace('de', '')
-          .replace('la', '')
-          .replace('lo', '')
-          .replace('le', '')
-          .replace('del', '')
-          .replace('a', '')
-          .split(' ')
-        if (palabras.length === 1) {
-          const palabra = palabras[0]
-          return (
-            palabra.charAt(0).toUpperCase() +
-            palabra.charAt(1).toUpperCase() +
-            palabra.charAt(2).toUpperCase()
-          )
-        } else {
-          const iniciales = palabras.map((palabra) =>
-            palabra.charAt(0).toUpperCase()
-          )
-          return iniciales.join('')
-        }
-      } else {
-        return text.toUpperCase()
-      }
-    },
     getSupervisor(name) {
       let palabras = name.split('.')
       palabras = palabras

@@ -192,7 +192,7 @@ export default {
     this.$store.commit('setPageTitle', this.session.name)
     this.$store.commit(
       'setPagePreTitle',
-      this.abbreviate(this.$store.getters.getSubject.name)
+      this.$abbreviate(this.$store.getters.getSubject.name)
     )
 
     // Get practice group
@@ -212,33 +212,6 @@ export default {
     this.group = this.$store.getters.getGroup
   },
   methods: {
-    abbreviate(text) {
-      if (text.length > 3) {
-        const palabras = text
-          .replace('de', '')
-          .replace('la', '')
-          .replace('lo', '')
-          .replace('le', '')
-          .replace('del', '')
-          .replace('a', '')
-          .split(' ')
-        if (palabras.length === 1) {
-          const palabra = palabras[0]
-          return (
-            palabra.charAt(0).toUpperCase() +
-            palabra.charAt(1).toUpperCase() +
-            palabra.charAt(2).toUpperCase()
-          )
-        } else {
-          const iniciales = palabras.map((palabra) =>
-            palabra.charAt(0).toUpperCase()
-          )
-          return iniciales.join('')
-        }
-      } else {
-        return text.toUpperCase()
-      }
-    },
     getSessionDate(session) {
       const groups = this.user.groups
       const groupsId = groups.map((group) => group.id)
