@@ -43,7 +43,7 @@ export default {
   css: [
     "@fortawesome/fontawesome-svg-core/styles.css",
     "@/assets/css/main.css",
-    "@/assets/css/style.css",
+    "@/assets/css/style.css"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -51,6 +51,7 @@ export default {
     "~/plugins/fontawesome.js",
     "~/plugins/i18n.js",
     "~/plugins/utils.js",
+    { src: "~/plugins/calendar.js", mode: "client" },
     { src: "~plugins/vcalendar.js", ssr: false },
     { src: "~/plugins/apexcharts.js", mode: "client" },
     { src: "@/plugins/click-outside.js", ssr: false },
@@ -76,7 +77,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     // https://go.nuxtjs.dev/tailwindcss
-    "@nuxt/postcss8",
+    "@nuxt/postcss8"
   ],
 
   colorMode: {

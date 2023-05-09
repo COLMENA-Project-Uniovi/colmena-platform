@@ -75,6 +75,7 @@ export default {
       user: this.$auth.$storage.getUniversal('user'),
       title: 'Inicio',
       subjects: 0,
+      showDate: new Date(),
     }
   },
   head() {
@@ -105,6 +106,10 @@ export default {
   mounted() {
     this.$store.commit('setPageTitle', this.title)
   },
-  methods: {},
+  methods: {
+    setShowDate(d) {
+      this.showDate = d
+    },
+  },
 }
 </script>

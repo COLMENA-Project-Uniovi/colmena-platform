@@ -13,34 +13,6 @@
       </h2>
     </div>
     <div
-      class="relative flex flex-col w-full gap-2 p-10 bg-white shadow-sm rounded-xl"
-    >
-      <h2 class="text-2xl font-bold">Descripción</h2>
-      <p>
-        {{ subject.description }}
-      </p>
-    </div>
-
-    <div
-      class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl"
-    >
-      <span class="text-3xl font-bold text-white"
-        >{{ supervisor?.username }}
-      </span>
-      <span class="font-bold text-gray-200">Profesor</span>
-    </div>
-
-    <div
-      class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl"
-    >
-      <v-calendar
-        :attributes="attrs"
-        :columns="1"
-        class="!w-full !border-none"
-      ></v-calendar>
-    </div>
-
-    <div
       class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
     >
       <p class="w-full pl-2 font-semibold text-left">Sesiones</p>
@@ -54,7 +26,6 @@
           <span
             class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl"
           >
-            {{ getSessionDate(session) }}
           </span>
           <span
             class="flex items-center justify-center h-10 px-2 text-white button-secondary rounded-xl"
@@ -64,6 +35,24 @@
           <span class=""> {{ session.name }} </span>
         </nuxt-link>
       </div>
+    </div>
+
+    <div
+      class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl"
+    >
+      <calendar-view
+        :show-date="showDate"
+        :items="events"
+        class="theme-default holiday-us-traditional holiday-us-official"
+        @click-item="clickDate"
+      >
+        <template #header="{ headerProps }">
+          <calendar-view-header
+            :header-props="headerProps"
+            @input="setShowDate"
+          />
+        </template>
+      </calendar-view>
     </div>
   </div>
 </template>
@@ -82,6 +71,8 @@ export default {
         username: '',
       },
       id: this.$route.params.subject,
+      showDate: new Date('2023-05-09'),
+      events: [],
       attrs: [
         {
           key: 'today',
@@ -107,34 +98,28 @@ export default {
     )
     const responseJSON = await response
     this.subject = responseJSON.data
-    this.$store.commit('setSubject', JSON.stringify(this.subject))
     this.$store.commit('setPageTitle', this.$abbreviate(this.subject.name))
 
-    // Get practice group
-    const groups = this.user.groups
-    const groupsId = groups.map((group) => group.id)
-
     this.subject.sessions.forEach((session) => {
-      session.session_schedules.forEach((sessionSchedule) => {
-        if (groupsId.includes(sessionSchedule.practice_group_id)) {
-          this.$store.commit('setGroup', sessionSchedule.practice_group_id)
-          sessionSchedule.practice_group.supervisor.username =
-            this.getSupervisor(
-              sessionSchedule.practice_group.supervisor.username
-            )
-          this.$store.commit(
-            'setSupervisor',
-            JSON.stringify(sessionSchedule.practice_group.supervisor)
-          )
-          const event = {
-            highlight: {
-              color: 'purple',
-              fillMode: 'light',
-            },
-            dates: Date.parse(sessionSchedule.date),
-          }
-          this.attrs.push(event)
+      let sessionsSchedules = session.session_schedules
+
+      if (this.user.level === 'student') {
+        // Get practice group
+        const groups = this.user.groups
+        const groupsId = groups.map((group) => group.id)
+
+        sessionsSchedules = sessionsSchedules.filter((sessionSchedule) => {
+          return groupsId.includes(sessionSchedule.practice_group_id)
+        })
+      }
+
+      sessionsSchedules.forEach((sessionSchedule) => {
+        const event = {
+          startDate: sessionSchedule.date,
+          title: `${session.name} - ${sessionSchedule.practice_group.name}`,
+          url: `/private/sessions/session/${session.id}`,
         }
+        this.events.push(event)
       })
     })
   },
@@ -143,6 +128,9 @@ export default {
     this.group = this.$store.getters.getGroup
   },
   methods: {
+    clickDate(calendarItem, windowEvent) {
+      console.log(calendarItem.originalItem.url)
+    },
     getSupervisor(name) {
       let palabras = name.split('.')
       palabras = palabras
@@ -160,6 +148,9 @@ export default {
       const startHour = new Date(Date.parse(sessionSchedule.start_hour))
       const endHour = new Date(Date.parse(sessionSchedule.end_hour))
       return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${startHour.getHours()}:${startHour.getMinutes()}-${endHour.getHours()}:${endHour.getMinutes()}`
+    },
+    setShowDate(d) {
+      this.showDate = d
     },
   },
 }
