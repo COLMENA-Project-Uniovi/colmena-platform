@@ -129,7 +129,7 @@ export default {
   },
   methods: {
     clickDate(calendarItem, windowEvent) {
-      console.log(calendarItem.originalItem.url)
+      this.$router.push(this.localePath(calendarItem.originalItem.url))
     },
     getSupervisor(name) {
       let palabras = name.split('.')

@@ -11,23 +11,44 @@
       <h2 class="text-4xl font-bold opacity-95">
         {{ session.name }}
       </h2>
-    </div>
-    <div
-      class="relative flex flex-col w-full gap-2 py-10 bg-white shadow-sm px-14 rounded-xl"
-    >
-      <h2 class="text-2xl font-bold">Objetivos de la sesión</h2>
-      <p>
-        {{ session.objective }}
-      </p>
+      <p>{{ session.objective }}</p>
     </div>
 
-    <div
-      class="relative flex flex-col items-center justify-center w-full gap-1 py-10 shadow-sm bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 px-14 rounded-xl"
-    >
-      <span class="text-3xl font-bold text-white"
-        >{{ supervisor?.username }}
-      </span>
-      <span class="font-bold text-gray-200">Profesor</span>
+    <div class="relative flex w-full col-start-1 col-end-3 gap-4">
+      <div class="flex flex-col w-1/3 gap-2">
+        <p class="px-2 font-semibold">Mostrar grupo:</p>
+        <select
+          v-model="filters.group"
+          class="bg-white shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none"
+          name="type"
+        >
+          <option :value="null" selected>Todos</option>
+          <option
+            v-for="practice_group in practice_groups"
+            :key="practice_group.id"
+            :value="practice_group.id"
+          >
+            {{ practice_group.name }}
+          </option>
+        </select>
+      </div>
+      <div class="flex flex-col w-1/3 gap-2">
+        <p class="px-2 font-semibold">Mostrar usuario:</p>
+        <select
+          v-model="filters.user"
+          class="bg-white shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none"
+          name="type"
+        >
+          <option :value="null" selected>Todos</option>
+          <option
+            v-for="student in users"
+            :key="student.id"
+            :value="student.id"
+          >
+            {{ student.name }} {{ student.surname }} - {{ student.username }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div
@@ -115,6 +136,20 @@
           </div>
           <div class="hidden p-4 pt-0" marker-info>
             <div class="flex flex-col gap-2">
+              <div
+                v-if="(user.level = 'teacher')"
+                class="flex flex-col rounded-lg shadow-sm"
+              >
+                <span
+                  class="w-full p-2 text-xl font-bold bg-white rounded-lg border-[1px] border-gray-100"
+                  >Alumno</span
+                >
+                <span class="p-2 pl-3 text-sm">
+                  {{ marker.user.name }} {{ marker.user.surname }}
+                  {{ marker.user.surname2 }} -
+                  {{ marker.user.username }}
+                </span>
+              </div>
               <div class="flex flex-col rounded-lg shadow-sm">
                 <span
                   class="w-full p-2 text-xl font-bold bg-white rounded-lg border-[1px] border-gray-100"
@@ -165,6 +200,8 @@ export default {
       filters: {
         family: null,
         type: null,
+        group: null,
+        user: null,
       },
       order: {
         by: null,
@@ -172,6 +209,8 @@ export default {
       },
       markers: [],
       sessions_scheduled: [],
+      practice_groups: [],
+      users: [],
       id: this.$route.params.session,
       selected_compilation: 0,
     }
@@ -189,20 +228,16 @@ export default {
     )
     const responseJSON = await response
     this.session = responseJSON.data
+
     this.$store.commit('setPageTitle', this.session.name)
     this.$store.commit(
       'setPagePreTitle',
-      this.$abbreviate(this.$store.getters.getSubject.name)
+      this.$abbreviate(this.session.subject.name)
     )
 
-    // Get practice group
-    const groups = this.user.groups
-    const groupsId = groups.map((group) => group.id)
-
     this.session.session_schedules.forEach((sessionSchedule) => {
-      if (groupsId.includes(sessionSchedule.practice_group_id)) {
-        this.sessions_scheduled.push(sessionSchedule)
-      }
+      this.practice_groups.push(sessionSchedule.practice_group)
+      this.users.push(...sessionSchedule.practice_group.users)
     })
 
     this.markers = this.session.markers
@@ -212,17 +247,6 @@ export default {
     this.group = this.$store.getters.getGroup
   },
   methods: {
-    getSessionDate(session) {
-      const groups = this.user.groups
-      const groupsId = groups.map((group) => group.id)
-      const sessionSchedule = session.session_schedules.find((element) =>
-        groupsId.includes(element.practice_group_id)
-      )
-      const date = new Date(Date.parse(sessionSchedule.date))
-      const startHour = new Date(Date.parse(sessionSchedule.start_hour))
-      const endHour = new Date(Date.parse(sessionSchedule.end_hour))
-      return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${startHour.getHours()}:${startHour.getMinutes()}-${endHour.getHours()}:${endHour.getMinutes()}`
-    },
     expandError(id) {
       const markerInfo = document.querySelector(
         `[data-error-id="${id}"] [marker-info]`
@@ -239,27 +263,44 @@ export default {
       this.filters.type = type
     },
     filter(markers) {
-      const marcadores = markers.filter((marker) => {
-        if (this.filters.family !== null && this.filters.type !== null) {
+      let marcadores = markers.filter((marker) => {
+        if (this.filters.family !== null) {
           return (
-            marker.error.error_id === this.filters.type &&
-            marker.error.family_id === this.filters.family
+            parseInt(marker.error.family_id) === parseInt(this.filters.family)
           )
-        }
-
-        if (this.filters.family !== null && this.filters.type == null) {
-          return marker.error.family_id === this.filters.family
-        }
-
-        if (this.filters.family == null && this.filters.type !== null) {
-          return marker.error.error_id === this.filters.type
-        }
-
-        if (this.filters.family == null && this.filters.type == null) {
+        } else {
           return true
         }
+      })
 
-        return false
+      marcadores = marcadores.filter((marker) => {
+        if (this.filters.type !== null) {
+          return parseInt(marker.error.error_id) === parseInt(this.filters.type)
+        } else {
+          return true
+        }
+      })
+
+      marcadores = marcadores.filter((marker) => {
+        if (this.filters.group !== null) {
+          const group = this.practice_groups.find(
+            (group) => parseInt(group.id) === parseInt(this.filters.group)
+          )
+          const user = group.users.some(
+            (user) => parseInt(user.id) === parseInt(marker.user_id)
+          )
+          return user
+        } else {
+          return true
+        }
+      })
+
+      marcadores = marcadores.filter((marker) => {
+        if (this.filters.user !== null) {
+          return parseInt(marker.user_id) === parseInt(this.filters.user)
+        } else {
+          return true
+        }
       })
 
       return marcadores
