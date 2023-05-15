@@ -12,48 +12,53 @@
         {{ subject.name }}
       </h2>
     </div>
-    <div
-      class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
-    >
-      <p class="w-full pl-2 font-semibold text-left">Sesiones</p>
-      <div class="flex flex-col items-center justify-center w-full gap-2">
-        <nuxt-link
-          v-for="session in subject.sessions"
-          :key="session.id"
-          :to="localePath(`/private/sessions/session/${session.id}`)"
-          class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm"
+
+    <!-- Sessions -->
+    <div class="flex flex-col gap-4">
+      <div
+        class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl"
+      >
+        <calendar-view
+          :show-date="showDate"
+          :items="events"
+          class="theme-default holiday-us-traditional holiday-us-official"
+          @click-item="clickDate"
         >
-          <span
-            class="flex items-center justify-center h-10 px-2 text-white button-primary rounded-xl"
+          <template #header="{ headerProps }">
+            <calendar-view-header
+              :header-props="headerProps"
+              @input="setShowDate"
+            />
+          </template>
+        </calendar-view>
+      </div>
+      <div
+        class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
+      >
+        <p class="w-full pl-2 font-semibold text-left">Sesiones</p>
+        <div class="flex flex-col items-center justify-center w-full gap-2">
+          <nuxt-link
+            v-for="session in subject.sessions"
+            :key="session.id"
+            :to="localePath(`/private/sessions/session/${session.id}`)"
+            class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm"
           >
-          </span>
-          <span
-            class="flex items-center justify-center h-10 px-2 text-white button-secondary rounded-xl"
-          >
-            {{ session.language_id == 1 ? 'Java' : 'Otro' }}
-          </span>
-          <span class=""> {{ session.name }} </span>
-        </nuxt-link>
+            <span
+              class="flex items-center justify-center h-10 px-2 text-white button-secondary rounded-xl"
+            >
+              {{ session.language_id == 1 ? 'Java' : 'Otro' }}
+            </span>
+            <span class=""> {{ session.name }} </span>
+          </nuxt-link>
+        </div>
       </div>
     </div>
 
-    <div
-      class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl"
-    >
-      <calendar-view
-        :show-date="showDate"
-        :items="events"
-        class="theme-default holiday-us-traditional holiday-us-official"
-        @click-item="clickDate"
-      >
-        <template #header="{ headerProps }">
-          <calendar-view-header
-            :header-props="headerProps"
-            @input="setShowDate"
-          />
-        </template>
-      </calendar-view>
-    </div>
+    <!-- Error types by session -->
+    <ErrorByTypeFamily :subject="subject" />
+
+    <!-- Errors by student -->
+    <ErrorsByStudent :subject="subject" />
   </div>
 </template>
 
@@ -91,7 +96,7 @@ export default {
     }
   },
   async created() {
-    const data = { id: this.id }
+    const data = { id: this.id, userType: this.user.level }
     const response = await this.$axios.post(
       'academic/subjects/list_subject_by_id.json',
       data

@@ -65,6 +65,7 @@ export default {
       "~/components/nav-bars",
       "~/components/top",
       "~/components/charts",
+      "~/components/charts/subject",
       "~/components/filters",
       "~/components/filters/markers",
     ],
@@ -131,7 +132,7 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    baseURL: "http://localhost/colmena-manager/api/1.0/",
+    baseURL: "https://dev.colmenaproject.es/admin/api/1.0/",
   },
 
   auth: {
