@@ -14,14 +14,15 @@
     </div>
 
     <!-- Sessions -->
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col col-start-1 col-end-3 gap-4">
       <div
-        class="relative flex items-start justify-center w-full overflow-hidden shadow-sm rounded-xl"
+        class="relative flex items-start justify-center w-full overflow-hidden bg-white shadow-md rounded-xl"
       >
         <calendar-view
           :show-date="showDate"
           :items="events"
-          class="theme-default holiday-us-traditional holiday-us-official"
+          :starting-day-of-week="1"
+          class="cv-calendar"
           @click-item="clickDate"
         >
           <template #header="{ headerProps }">

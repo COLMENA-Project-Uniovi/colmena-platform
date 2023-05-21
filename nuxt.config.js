@@ -65,6 +65,7 @@ export default {
       "~/components/blobs",
       "~/components/nav-bars",
       "~/components/top",
+      "~/components/calendar",
       "~/components/charts",
       "~/components/charts/subject",
       "~/components/filters",

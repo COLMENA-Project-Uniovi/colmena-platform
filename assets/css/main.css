@@ -27,6 +27,9 @@ body {
   .transition-base {
     @apply transition-all duration-300 ease-in-out;
   }
+  .card{
+    @apply flex flex-col items-center justify-start gap-4 p-4 bg-white shadow-md transition-base rounded-xl;
+  }
 }
 
 ::-webkit-scrollbar {
