@@ -59,7 +59,7 @@
     <ErrorByTypeFamily :subject="subject" />
 
     <!-- Errors by student -->
-    <ErrorsByStudent :subject="subject" />
+    <ErrorsByStudent v-if="user.level == 'teacher'" :subject="subject" />
 
     <!-- Errors by timeline -->
     <ErrorsByTimeline :subject="subject" />
