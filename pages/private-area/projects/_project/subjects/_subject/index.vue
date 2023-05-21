@@ -79,6 +79,7 @@ export default {
         username: '',
       },
       id: this.$route.params.subject,
+      projectId: this.$route.params.project,
       showDate: new Date('2023-05-09'),
       events: [],
       attrs: [
@@ -126,6 +127,15 @@ export default {
         this.events.push(event)
       })
     })
+
+    const dataProject = { id: this.projectId }
+    const responseProject = await this.$axios.post(
+      'academic/projects/get.json',
+      dataProject
+    )
+    const responseJSONProject = await responseProject
+    this.project = responseJSONProject.data
+    this.$store.commit('setProject', this.project)
   },
   mounted() {
     this.supervisor = this.$store.getters.getSupervisor

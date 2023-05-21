@@ -2,7 +2,7 @@
   <div
     class="fixed top-0 right-0 flex items-center xl:w-[80%] bg-gray-50 z-[1] shadow"
   >
-    <div class="flex items-center justify-between w-full px-10 py-5">
+    <div class="flex items-center justify-between w-full px-20 py-5">
       <div class="flex items-center justify-between text-gray-700">
         <h2 class="text-xl font-bold">
           {{
