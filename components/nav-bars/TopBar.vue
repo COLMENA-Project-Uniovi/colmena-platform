@@ -1,12 +1,15 @@
 <template>
   <div
-    class="fixed top-0 left-0 flex items-center xl:w-10/12 md:w-9/12 py-5 pl-24 bg-gray-50 z-[1]"
+    class="fixed top-0 right-0 flex items-center xl:w-[80%] bg-gray-50 z-[1] shadow"
   >
-    <div class="flex items-center justify-between w-full px-10">
+    <div class="flex items-center justify-between w-full px-10 py-5">
       <div class="flex items-center justify-between text-gray-700">
         <h2 class="text-xl font-bold">
-          {{ preTitle }} |
-          {{ $store.state.pageTitle }}
+          {{
+            $store.getters.getPageTitle == null
+              ? 'Inicio'
+              : $store.getters.getPageTitle
+          }}
         </h2>
       </div>
       <div class="flex items-center justify-between gap-2 text-gray-700">
@@ -36,16 +39,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      project: [],
-      preTitle: '',
-    }
-  },
-  mounted() {
-    this.project = this.$store.getters.getProject
-    this.preTitle = this.$store.getters.getPreTitle
-  },
   methods: {
     goBack() {
       history.back()

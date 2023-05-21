@@ -38,6 +38,7 @@ export default {
       },
     ],
   },
+  srr:false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -140,7 +141,7 @@ export default {
       login: "/login",
       logout: "/",
       callback: "/login",
-      home: "/private/project-selection",
+      home: "/private-area/projects",
     },
     strategies: {
       local: {

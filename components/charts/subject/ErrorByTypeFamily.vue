@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
+    class="flex flex-col items-center justify-start w-full col-start-2 col-end-3 gap-2 text-gray-700"
   >
     <p class="w-full pl-2 text-xl font-bold text-left">
       Número total de errores cometidos
@@ -74,7 +74,7 @@ export default {
         fill: {
           opacity: 1,
         },
-        colors: ['#f59e0b'],
+        colors: ['#f4a135'],
       },
       groupBy: 'family',
     }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed top-0 right-0 flex flex-col items-center justify-start h-screen gap-4 px-6 py-5 bg-gray-100 xl:w-2/12 md:w-3/12 transition-base"
+    class="fixed top-0 right-0 flex flex-col items-center justify-start h-screen gap-4 px-6 py-5 bg-gray-100 xl:w-[15%] md:w-3/12 transition-base"
   >
     <div class="flex items-center justify-center w-full text-gray-700">
       <form

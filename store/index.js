@@ -8,7 +8,7 @@ export const getters = {
   },
 
   getProject(state) {
-    return JSON.parse(localStorage.getItem('project'));
+    return state.project;
   },
   getSubject(state) {
     return JSON.parse(localStorage.getItem('subject'));
@@ -19,8 +19,8 @@ export const getters = {
   getSupervisor(state) {
     return JSON.parse(localStorage.getItem('supervisor'));
   },
-  getPreTitle(state) {
-    return localStorage.getItem('pretitle');
+  getPageTitle(state) {
+    return state.pageTitle;
   }
 }
 
@@ -35,7 +35,6 @@ export const state = () => ({
 
 export const mutations = {
   setProject(state, value) {
-    localStorage.setItem('project', value);
     state.project = value;
   },
   setSubject(state, value) {
@@ -50,9 +49,6 @@ export const mutations = {
     localStorage.setItem('supervisor', value);
   },
   setPageTitle(state, title) {
-    state.pageTitle = title
+    state.pageTitle = title;
   },
-  setPagePreTitle(state, title) {
-    localStorage.setItem('pretitle', title);
-  }
 }

@@ -106,7 +106,7 @@ export default {
     )
     const responseJSON = await response
     this.subject = responseJSON.data
-    this.$store.commit('setPageTitle', this.$abbreviate(this.subject.name))
+    this.$store.commit('setPageTitle', this.subject.name)
     this.subject.sessions.forEach((session) => {
       let sessionsSchedules = session.session_schedules
       if (this.user.level === 'student') {
