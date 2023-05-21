@@ -24,11 +24,11 @@
         >
           <option :value="null" selected>Todos</option>
           <option
-            v-for="practice_group in practice_groups"
-            :key="practice_group.id"
-            :value="practice_group.id"
+            v-for="(value, key) in practice_groups"
+            :key="key"
+            :value="key"
           >
-            {{ practice_group.name }}
+            {{ value.name }}
           </option>
         </select>
       </div>
@@ -209,9 +209,11 @@ export default {
       },
       markers: [],
       sessions_scheduled: [],
-      practice_groups: [],
-      users: [],
+      practice_groups: {},
+      users: {},
       id: this.$route.params.session,
+      projectId: this.$route.params.project,
+      subjectId: this.$route.params.subject,
       selected_compilation: 0,
     }
   },
@@ -233,8 +235,10 @@ export default {
 
     this.session.session_schedules.forEach((sessionSchedule) => {
       this.practice_groups[sessionSchedule.practice_group.id] =
-        sessionSchedule.practice_group.name
-      this.users.push(...sessionSchedule.practice_group.users)
+        sessionSchedule.practice_group
+      sessionSchedule.practice_group.users.forEach((user) => {
+        this.users[user.id] = user
+      })
     })
 
     this.markers = this.session.markers
@@ -289,9 +293,7 @@ export default {
 
       marcadores = marcadores.filter((marker) => {
         if (this.filters.group !== null) {
-          const group = this.practice_groups.find(
-            (group) => parseInt(group.id) === parseInt(this.filters.group)
-          )
+          const group = this.practice_groups[this.filters.group]
           const user = group.users.some(
             (user) => parseInt(user.id) === parseInt(marker.user_id)
           )

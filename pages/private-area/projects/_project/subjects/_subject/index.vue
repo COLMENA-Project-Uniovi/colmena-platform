@@ -41,7 +41,11 @@
           <nuxt-link
             v-for="session in subject.sessions"
             :key="session.id"
-            :to="localePath(`/private/sessions/session/${session.id}`)"
+            :to="
+              localePath(
+                `/private-area/projects/${projectId}/subjects/${subject.id}/sessions/${session.id}`
+              )
+            "
             class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm"
           >
             <span
@@ -81,6 +85,7 @@ export default {
       },
       id: this.$route.params.subject,
       projectId: this.$route.params.project,
+      subjectId: this.$route.params.subject,
       showDate: new Date('2023-05-09'),
       events: [],
       attrs: [
