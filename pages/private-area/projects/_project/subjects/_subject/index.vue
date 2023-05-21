@@ -16,7 +16,7 @@
     <!-- Sessions -->
     <div class="flex flex-col col-start-1 col-end-3 gap-4">
       <div
-        class="relative flex items-start justify-center w-full overflow-hidden bg-white shadow-md rounded-xl"
+        class="relative flex items-start justify-center w-full p-4 overflow-hidden bg-white shadow-md rounded-xl"
       >
         <calendar-view
           :show-date="showDate"

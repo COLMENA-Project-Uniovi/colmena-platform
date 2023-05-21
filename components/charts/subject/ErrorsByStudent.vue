@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-start w-full col-start-2 col-end-3 gap-2 card text-gray-700"
+    class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card"
   >
     <p class="w-full pl-2 text-xl font-bold text-left">
       Errores cometidos por alumnos
