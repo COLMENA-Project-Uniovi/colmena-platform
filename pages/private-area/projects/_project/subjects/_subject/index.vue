@@ -59,11 +59,14 @@
       </div>
     </div>
 
-    <!-- Error types by session -->
-    <ErrorByTypeFamily :subject="subject" />
+    <!-- Error by type -->
+    <ErrorByType :subject="subject" />
+
+    <!-- Error by Family -->
+    <ErrorByFamily :subject="subject" />
 
     <!-- Errors by student -->
-    <ErrorsByStudent v-if="user.level == 'teacher'" :subject="subject" />
+    <ErrorsByStudent :subject="subject" />
 
     <!-- Errors by timeline -->
     <ErrorsByTimeline :subject="subject" />
@@ -77,8 +80,8 @@ export default {
   data: function () {
     return {
       title: '',
-      user: this.$auth.$storage.getUniversal('user'),
-      subject: 0,
+      user: null,
+      subject: {},
       group: 0,
       supervisor: {
         username: '',
@@ -106,6 +109,7 @@ export default {
     }
   },
   async created() {
+    this.user = this.$auth.$storage.getUniversal('user')
     const data = { id: this.id, userType: this.user.level }
     const response = await this.$axios.post(
       'academic/subjects/list_subject_by_id.json',

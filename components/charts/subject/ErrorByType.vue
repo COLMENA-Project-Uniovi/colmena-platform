@@ -3,22 +3,8 @@
     class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card"
   >
     <p class="w-full pl-2 text-xl font-bold text-left">
-      Número total de errores cometidos
+      Número total de errores cometidos por tipo de error
     </p>
-
-    <div class="relative flex w-full col-start-1 col-end-3 gap-4">
-      <div class="flex items-center justify-start w-full gap-2">
-        <p class="px-2 text-sm font-semibold">Agrupar por:</p>
-        <select
-          v-model="groupBy"
-          class="bg-white shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none"
-          name="type"
-        >
-          <option value="family" selected>Familia de error</option>
-          <option value="type" selected>Tipo de error</option>
-        </select>
-      </div>
-    </div>
 
     <apexchart
       ref="chart"
@@ -85,13 +71,13 @@ export default {
         name: 'Errores',
         data: [],
       }
-      Object.keys(newValue.family_errors).forEach((key) => {
-        const markers = newValue.markers.filter((marker) => {
-          return parseInt(marker.family_error.id) === parseInt(key)
+      Object.keys(this.subject.errors).forEach((key) => {
+        const markers = this.subject.markers.filter((marker) => {
+          return parseInt(marker.error_id) === parseInt(key)
         })
 
         serie.data.push({
-          x: newValue.family_errors[key],
+          x: this.subject.errors[key],
           y: markers.length,
         })
       })
@@ -104,29 +90,18 @@ export default {
         name: 'Errores',
         data: [],
       }
-      if (newValue === 'family') {
-        Object.keys(this.subject.family_errors).forEach((key) => {
-          const markers = this.subject.markers.filter((marker) => {
-            return parseInt(marker.family_error.id) === parseInt(key)
-          })
 
-          serie.data.push({
-            x: this.subject.family_errors[key],
-            y: markers.length,
-          })
+      Object.keys(this.subject.errors).forEach((key) => {
+        const markers = this.subject.markers.filter((marker) => {
+          return parseInt(marker.error_id) === parseInt(key)
         })
-      } else {
-        Object.keys(this.subject.errors).forEach((key) => {
-          const markers = this.subject.markers.filter((marker) => {
-            return parseInt(marker.error_id) === parseInt(key)
-          })
 
-          serie.data.push({
-            x: this.subject.errors[key],
-            y: markers.length,
-          })
+        serie.data.push({
+          x: this.subject.errors[key],
+          y: markers.length,
         })
-      }
+      })
+
       this.$refs.chart.updateOptions({
         series: [serie],
       })
