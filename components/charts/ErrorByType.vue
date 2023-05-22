@@ -19,7 +19,11 @@
 <script>
 export default {
   props: {
-    subject: {
+    errors: {
+      type: Object,
+      default: () => ({}),
+    },
+    markers: {
       type: Object,
       default: () => ({}),
     },
@@ -62,46 +66,52 @@ export default {
         },
         colors: ['#f4a135'],
       },
-      groupBy: 'family',
     }
   },
   watch: {
-    subject(newValue, oldValue) {
+    items(newValue, oldValue) {
       const serie = {
         name: 'Errores',
         data: [],
       }
-      Object.keys(this.subject.errors).forEach((key) => {
-        const markers = this.subject.markers.filter((marker) => {
-          return parseInt(marker.error_id) === parseInt(key)
-        })
+      // necestamos errors y makers
+      if (newValue.errors.length) {
+        Object.keys(newValue.errors).forEach((key) => {
+          const markers = newValue.markers.filter((marker) => {
+            return parseInt(marker.error_id) === parseInt(key)
+          })
 
-        serie.data.push({
-          x: this.subject.errors[key],
-          y: markers.length,
+          serie.data.push({
+            x: newValue.errors[key],
+            y: markers.length,
+          })
         })
-      })
-      this.$refs.chart.updateOptions({
-        series: [serie],
-      })
+        this.$refs.chart.updateOptions({
+          series: [serie],
+        })
+      }
     },
-    groupBy(newValue, oldValue) {
+    errors(newValue, oldValue) {
+      this.init()
+    },
+  },
+  methods: {
+    init: function () {
       const serie = {
         name: 'Errores',
         data: [],
       }
-
-      Object.keys(this.subject.errors).forEach((key) => {
-        const markers = this.subject.markers.filter((marker) => {
+      // necestamos errors y makers
+      Object.keys(this.errors).forEach((key) => {
+        const markersAux = this.markers.filter((marker) => {
           return parseInt(marker.error_id) === parseInt(key)
         })
 
         serie.data.push({
-          x: this.subject.errors[key],
-          y: markers.length,
+          x: this.errors[key],
+          y: markersAux.length,
         })
       })
-
       this.$refs.chart.updateOptions({
         series: [serie],
       })

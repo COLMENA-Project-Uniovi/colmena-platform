@@ -19,13 +19,18 @@
 <script>
 export default {
   props: {
-    subject: {
+    students: {
+      type: Object,
+      default: () => ({}),
+    },
+    markers: {
       type: Object,
       default: () => ({}),
     },
   },
   data: function () {
     return {
+      studentsAux: [],
       series: [],
       chartOptions: {
         chart: {
@@ -62,34 +67,39 @@ export default {
         },
         colors: ['#f4a135'],
       },
-      students: {},
     }
   },
   watch: {
-    subject(newValue, oldValue) {
+    students(newValue, oldValue) {
+      this.init()
+    },
+  },
+  methods: {
+    init: function () {
       const serie = {
         name: 'Errores',
         data: [],
       }
-      this.students = newValue.students
 
-      newValue.markers.forEach((marker) => {
+      this.studentsAux = this.students
+
+      this.markers.forEach((marker) => {
         if (this.students[parseInt(marker.user_id)].errors === undefined) {
-          this.students[parseInt(marker.user_id)].errors = 0
+          this.studentsAux[parseInt(marker.user_id)].errors = 0
         }
-        this.students[parseInt(marker.user_id)].errors++
+        this.studentsAux[parseInt(marker.user_id)].errors++
       })
 
       // sort students by attribute
-      this.students = Object.fromEntries(
+      this.studentsAux = Object.fromEntries(
         Object.entries(this.students).sort(([, a], [, b]) => {
           return a.errors - b.errors
         })
       )
 
-      this.students = Object.values(this.students)
+      this.studentsAux = Object.values(this.studentsAux)
 
-      this.students.sort(function (a, b) {
+      this.studentsAux.sort(function (a, b) {
         if (a.errors > b.errors) {
           return -1
         }
@@ -99,7 +109,7 @@ export default {
         return 0
       })
 
-      Object.values(this.students).forEach((student) => {
+      Object.values(this.studentsAux).forEach((student) => {
         serie.data.push({
           x: `${student.name} ${student.surname} ${student.surname2}`,
           y: student.errors,

@@ -19,7 +19,11 @@
 <script>
 export default {
   props: {
-    subject: {
+    families: {
+      type: Object,
+      default: () => ({}),
+    },
+    markers: {
       type: Object,
       default: () => ({}),
     },
@@ -36,15 +40,20 @@ export default {
     }
   },
   watch: {
-    subject(newValue, oldValue) {
+    families(newValue, oldValue) {
+      this.init()
+    },
+  },
+  methods: {
+    init: function () {
       const series = []
       const labels = []
-      Object.keys(newValue.family_errors).forEach((key) => {
-        const markers = newValue.markers.filter((marker) => {
+      Object.keys(this.families).forEach((key) => {
+        const markers = this.markers.filter((marker) => {
           return parseInt(marker.family_error.id) === parseInt(key)
         })
 
-        labels.push(newValue.family_errors[key])
+        labels.push(this.families[key])
         series.push(markers.length)
       })
       this.chartOptions.labels = labels

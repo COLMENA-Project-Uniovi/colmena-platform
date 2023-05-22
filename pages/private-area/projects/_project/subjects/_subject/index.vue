@@ -60,16 +60,23 @@
     </div>
 
     <!-- Error by type -->
-    <ErrorByType :subject="subject" />
+    <ErrorByType :errors="subject.errors" :markers="subject.markers" />
 
     <!-- Error by Family -->
-    <ErrorByFamily :subject="subject" />
+    <ErrorByFamily
+      :families="subject.family_errors"
+      :markers="subject.markers"
+    />
 
     <!-- Errors by student -->
-    <ErrorsByStudent :subject="subject" />
+    <ErrorsByStudent :students="subject.students" :markers="subject.markers" />
 
     <!-- Errors by timeline -->
-    <ErrorsByTimeline :subject="subject" />
+    <ErrorsByTimeline
+      :sessions="subject.sessions"
+      :errors="subject.errors"
+      :markers="subject.markers"
+    />
   </div>
 </template>
 
@@ -81,7 +88,10 @@ export default {
     return {
       title: '',
       user: null,
-      subject: {},
+      subject: {
+        errors: [],
+        markers: [],
+      },
       group: 0,
       supervisor: {
         username: '',

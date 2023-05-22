@@ -67,7 +67,6 @@ export default {
       "~/components/top",
       "~/components/calendar",
       "~/components/charts",
-      "~/components/charts/subject",
       "~/components/filters",
       "~/components/filters/markers",
     ],
