@@ -73,6 +73,9 @@ export default {
     students(newValue, oldValue) {
       this.init()
     },
+    markers(newValue, oldValue) {
+      this.init()
+    },
   },
   methods: {
     init: function () {

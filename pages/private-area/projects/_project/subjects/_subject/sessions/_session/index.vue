@@ -1,5 +1,6 @@
 <template>
   <div class="grid grid-cols-2 gap-8 px-10 py-8">
+    <!-- Header -->
     <div
       class="relative flex flex-col w-full col-start-1 col-end-3 gap-2 py-20 overflow-hidden text-white shadow-sm px-14 bg-gradient-to-tr from-amber-500 to-amber-300 rounded-xl"
     >
@@ -14,6 +15,27 @@
       <p>{{ session.objective }}</p>
     </div>
 
+    <!-- Charts -->
+    <!-- Error by type -->
+    <ErrorByType :errors="session.errors" :markers="filter(markers)" />
+
+    <!-- Error by Family -->
+    <ErrorByFamily
+      :families="session.family_errors"
+      :markers="filter(markers)"
+    />
+
+    <!-- Errors by student -->
+    <ErrorsByStudent :students="session.students" :markers="filter(markers)" />
+
+    <!-- Errors by timeline -->
+    <ErrorsBySessionsScheduled
+      :schedules="session.session_schedules"
+      :errors="session.errors"
+      :markers="filter(markers)"
+    />
+
+    <!-- Filters -->
     <div class="relative flex w-full col-start-1 col-end-3 gap-4">
       <div class="flex flex-col w-1/3 gap-2">
         <p class="px-2 font-semibold">Mostrar grupo:</p>
@@ -51,6 +73,7 @@
       </div>
     </div>
 
+    <!-- Markers and compilations -->
     <div
       class="flex flex-col items-center justify-start w-full gap-2 text-gray-700"
     >
@@ -193,7 +216,7 @@ export default {
     return {
       title: '',
       user: this.$auth.$storage.getUniversal('user'),
-      session: 0,
+      session: {},
       supervisor: {
         username: '',
       },
@@ -230,9 +253,7 @@ export default {
     )
     const responseJSON = await response
     this.session = responseJSON.data
-
     this.$store.commit('setPageTitle', this.session.name)
-
     this.session.session_schedules.forEach((sessionSchedule) => {
       this.practice_groups[sessionSchedule.practice_group.id] =
         sessionSchedule.practice_group
@@ -240,9 +261,7 @@ export default {
         this.users[user.id] = user
       })
     })
-
     this.markers = this.session.markers
-
     const dataProject = { id: this.projectId }
     const responseProject = await this.$axios.post(
       'academic/projects/get.json',
@@ -282,7 +301,6 @@ export default {
           return true
         }
       })
-
       marcadores = marcadores.filter((marker) => {
         if (this.filters.type !== null) {
           return parseInt(marker.error.error_id) === parseInt(this.filters.type)
@@ -290,7 +308,6 @@ export default {
           return true
         }
       })
-
       marcadores = marcadores.filter((marker) => {
         if (this.filters.group !== null) {
           const group = this.practice_groups[this.filters.group]
@@ -302,7 +319,6 @@ export default {
           return true
         }
       })
-
       marcadores = marcadores.filter((marker) => {
         if (this.filters.user !== null) {
           return parseInt(marker.user_id) === parseInt(this.filters.user)
@@ -310,7 +326,6 @@ export default {
           return true
         }
       })
-
       return marcadores
     },
     addOrder(by, asc) {

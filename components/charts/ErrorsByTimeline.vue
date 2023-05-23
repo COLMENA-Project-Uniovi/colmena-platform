@@ -19,11 +19,7 @@
 <script>
 export default {
   props: {
-    subject: {
-      type: Object,
-      default: () => ({}),
-    },
-    sessions: {
+    session: {
       type: Object,
       default: () => ({}),
     },
@@ -59,47 +55,53 @@ export default {
     }
   },
   watch: {
-    sessions(newValue, oldValue) {
+    session(newValue, oldValue) {
       this.init()
     },
   },
   methods: {
     init: function () {
-      const categories = this.sessions.map((session) => {
-        return session.name
-      })
+      console.log('this.session :>> ', this.session)
+      // hora de inicio de la sesión
+      const startTime = this.session
+      // hora de fin de la sesión
+      // diferencia en minutos
+      // generar array de minutos
+      // const categories = this.sessions.map((session) => {
+      //   return session.name
+      // })
 
-      const sessionsIds = this.sessions.map((session) => {
-        return session.id
-      })
+      // const sessionsIds = this.sessions.map((session) => {
+      //   return session.id
+      // })
 
-      const series = []
+      // const series = []
 
-      Object.keys(this.errors).forEach((errorId) => {
-        const serie = {
-          name: this.errors[errorId],
-          data: [],
-        }
+      // Object.keys(this.errors).forEach((errorId) => {
+      //   const serie = {
+      //     name: this.errors[errorId],
+      //     data: [],
+      //   }
 
-        sessionsIds.forEach((sessionId) => {
-          const count = this.markers.filter((marker) => {
-            return (
-              parseInt(marker.error_id) === parseInt(errorId) &&
-              parseInt(marker.session_id) === parseInt(sessionId)
-            )
-          }).length
-          serie.data.push(count)
-        })
+      //   sessionsIds.forEach((sessionId) => {
+      //     const count = this.markers.filter((marker) => {
+      //       return (
+      //         parseInt(marker.error_id) === parseInt(errorId) &&
+      //         parseInt(marker.session_id) === parseInt(sessionId)
+      //       )
+      //     }).length
+      //     serie.data.push(count)
+      //   })
 
-        series.push(serie)
-      })
+      //   series.push(serie)
+      // })
 
-      this.$refs.chart.updateOptions({
-        series,
-        xaxis: {
-          categories,
-        },
-      })
+      // this.$refs.chart.updateOptions({
+      //   series,
+      //   xaxis: {
+      //     categories,
+      //   },
+      // })
     },
   },
 }

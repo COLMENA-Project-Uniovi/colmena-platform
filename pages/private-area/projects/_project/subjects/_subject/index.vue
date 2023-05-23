@@ -72,7 +72,7 @@
     <ErrorsByStudent :students="subject.students" :markers="subject.markers" />
 
     <!-- Errors by timeline -->
-    <ErrorsByTimeline
+    <ErrorsBySessions
       :sessions="subject.sessions"
       :errors="subject.errors"
       :markers="subject.markers"
