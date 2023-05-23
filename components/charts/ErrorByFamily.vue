@@ -1,17 +1,10 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card"
-  >
+  <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card">
     <p class="w-full pl-2 text-xl font-bold text-left">
       Número total de errores cometidos por familia de error
     </p>
 
-    <apexchart
-      ref="donut"
-      :options="chartOptions"
-      :series="series"
-      class="w-[80%]"
-    >
+    <apexchart ref="donut" :options="chartOptions" :series="series" class="2xl:w-[80%] xl:w-full">
     </apexchart>
   </div>
 </template>
