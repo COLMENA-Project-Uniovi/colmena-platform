@@ -57,6 +57,12 @@ export default {
           visible: this.$route.params.subject !== undefined,
         },
         {
+          name: 'Errores',
+          icon: 'fa-solid fa-bug',
+          route: `/private-area/projects/${this.$route.params.project}/errors`,
+          visible: this.$route.params.project !== undefined,
+        },
+        {
           name: 'Usuarios',
           icon: 'fa-solid fa-users',
           route: `/private-area/projects/${this.$route.params.project}/users`,

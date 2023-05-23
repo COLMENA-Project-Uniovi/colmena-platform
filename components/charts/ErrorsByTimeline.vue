@@ -1,17 +1,10 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card"
-  >
+  <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card">
     <p class="w-full pl-2 text-xl font-bold text-left">
       Errores cometidos a lo largo de la sesión
     </p>
 
-    <apexchart
-      ref="chart"
-      :options="chartOptions"
-      :series="series"
-      class="w-full"
-    >
+    <apexchart ref="chart" :options="chartOptions" :series="series" class="w-full">
     </apexchart>
   </div>
 </template>
@@ -63,7 +56,7 @@ export default {
     init: function () {
       console.log('this.session :>> ', this.session)
       // hora de inicio de la sesión
-      const startTime = this.session
+      // const startTime = this.session
       // hora de fin de la sesión
       // diferencia en minutos
       // generar array de minutos

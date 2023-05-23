@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+    <!-- <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
       <div class="flex items-center justify-between w-full px-2">
         <p class="w-full font-semibold text-left">Errores</p>
         <div class="flex items-center justify-center gap-2">
@@ -164,7 +164,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
