@@ -27,7 +27,6 @@
     <ErrorsBySessionsScheduled :schedules="session.session_schedules" :errors="session.errors"
       :markers="filter(markers)" />
 
-
     <h2 class="page-pretitle">Compilaciones y errores de esta sesión</h2>
 
     <!-- Filters -->
@@ -93,20 +92,44 @@
         <div v-for="marker in orderMarkers(filter(markers))" :key="marker.id"
           class="flex flex-col w-full gap-2 font-semibold shadow-md bg-gray-50 transition-base rounded-xl h-fit"
           :data-error-id="marker.id">
-          <div class="relative flex items-center gap-4 p-2 bg-white cursor-pointer rounded-xl"
+          <div class="relative flex flex-col items-start gap-2 p-3 bg-white cursor-pointer rounded-xl"
             @click="expandError(marker.id)">
-            <div
-              class="relative flex items-center justify-center gap-1 p-2 text-white rounded-lg group bg-colmenablue-600">
-              <span class="text-xs">
-                {{ marker.error?.family?.name }}
-              </span>
-              <font-awesome-icon icon="fa-regular fa-circle-info" class="text-sm opacity-60" />
+            <div class="flex">
+              <span class="text-base font-bold"> {{ marker.error?.name }} </span>
+            </div>
+            <div class="flex items-center justify-start gap-1">
               <div
-                class="absolute left-0 z-10 hidden p-4 text-sm font-normal leading-4 text-black -translate-y-full bg-white shadow-xl -top-4 w-96 rounded-xl group-hover:flex">
-                {{ marker.error?.family?.description }}
+                class="relative flex items-center justify-center gap-1 p-1 text-white rounded-lg group bg-colmenablue-600 opacity-90">
+                <font-awesome-icon icon="fa-regular fa-circle-info" class="text-sm opacity-60" />
+                <span class="text-xs">
+                  {{ marker.error?.family?.name }}
+                </span>
+                <div
+                  class="absolute left-0 z-10 hidden p-4 text-sm font-normal leading-4 text-black -translate-y-full bg-white shadow-xl -top-4 w-96 rounded-xl group-hover:flex">
+                  {{ marker.error?.family?.description }}
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-1 text-xs p-1 bg-green-600 font-semibold text-white rounded-lg  opacity-90">
+                <font-awesome-icon icon="fa-regular fa-calendar" class="opacity-60" />
+                <span class=""> {{
+                  marker.timestamp.split('T')[0]
+                }} </span>
+              </div>
+              <div
+                class="flex items-center gap-1 text-xs p-1 bg-orange-600 font-semibold text-white rounded-lg opacity-90 ">
+                <font-awesome-icon icon="fa-regular fa-clock" class="opacity-60" />
+                <span class=""> {{
+                  marker.timestamp.split('T')[1] }}
+                </span>
+              </div>
+              <div
+                class="flex items-center gap-1 text-xs p-1 bg-violet-600 font-semibold text-white rounded-lg opacity-90 ">
+                <font-awesome-icon icon="fa-regular fa-user" class="opacity-60" />
+                <span class=""> {{ marker.user.name }} {{ marker.user.surname }}
+                </span>
               </div>
             </div>
-            <span> {{ marker.error?.name }} </span>
             <font-awesome-icon icon="fa-solid fa-caret-down"
               class="absolute -translate-y-1/2 top-1/2 right-4 transition-base" marker-arrow />
           </div>
@@ -148,14 +171,14 @@
 <script>
 export default {
   auth: true,
-  transition: 'home',
+  transition: "home",
   data: function () {
     return {
-      title: '',
-      user: this.$auth.$storage.getUniversal('user'),
+      title: "",
+      user: this.$auth.$storage.getUniversal("user"),
       session: {},
       supervisor: {
-        username: '',
+        username: "",
       },
       filters: {
         family: null,
@@ -175,112 +198,106 @@ export default {
       projectId: this.$route.params.project,
       subjectId: this.$route.params.subject,
       selected_compilation: 0,
-    }
+    };
   },
   head() {
     return {
       title: this.title,
-    }
+    };
   },
   async created() {
-    const data = { id: this.id }
-    const response = await this.$axios.post(
-      'academic/subjects/get_session.json',
-      data
-    )
-    const responseJSON = await response
-    this.session = responseJSON.data
-    this.$store.commit('setPageTitle', this.session.name)
+    const data = { id: this.id };
+    const response = await this.$axios.post("academic/subjects/get_session.json", data);
+    const responseJSON = await response;
+    this.session = responseJSON.data;
+    this.title = this.session.name;
+    this.$store.commit("setPageTitle", this.session.name);
     this.session.session_schedules.forEach((sessionSchedule) => {
       this.practice_groups[sessionSchedule.practice_group.id] =
-        sessionSchedule.practice_group
+        sessionSchedule.practice_group;
       sessionSchedule.practice_group.users.forEach((user) => {
-        this.users[user.id] = user
-      })
-    })
-    this.markers = this.session.markers
-    const dataProject = { id: this.projectId }
+        this.users[user.id] = user;
+      });
+    });
+    this.markers = this.session.markers;
+    const dataProject = { id: this.projectId };
     const responseProject = await this.$axios.post(
-      'academic/projects/get.json',
+      "academic/projects/get.json",
       dataProject
-    )
-    const responseJSONProject = await responseProject
-    const project = responseJSONProject.data
-    this.$store.commit('setProject', project)
+    );
+    const responseJSONProject = await responseProject;
+    const project = responseJSONProject.data;
+    this.$store.commit("setProject", project);
   },
   mounted() {
-    this.supervisor = this.$store.getters.getSupervisor
-    this.group = this.$store.getters.getGroup
+    this.supervisor = this.$store.getters.getSupervisor;
+    this.group = this.$store.getters.getGroup;
   },
   methods: {
     expandError(id) {
-      const markerInfo = document.querySelector(
-        `[data-error-id="${id}"] [marker-info]`
-      )
-      markerInfo.classList.toggle('hidden')
+      const markerInfo = document.querySelector(`[data-error-id="${id}"] [marker-info]`);
+      markerInfo.classList.toggle("hidden");
       // rotar marker-arrow 180 grados
       const markerArrow = document.querySelector(
         `[data-error-id="${id}"] [marker-arrow]`
-      )
-      markerArrow.classList.toggle('rotate-180')
+      );
+      markerArrow.classList.toggle("rotate-180");
     },
     addFilter(family, type) {
-      this.filters.family = family
-      this.filters.type = type
+      this.filters.family = family;
+      this.filters.type = type;
     },
     filter(markers) {
       let marcadores = markers.filter((marker) => {
         if (this.filters.family !== null) {
-          return (
-            parseInt(marker.error.family_id) === parseInt(this.filters.family)
-          )
+          return parseInt(marker.error.family_id) === parseInt(this.filters.family);
         } else {
-          return true
+          return true;
         }
-      })
+      });
       marcadores = marcadores.filter((marker) => {
         if (this.filters.type !== null) {
-          return parseInt(marker.error.error_id) === parseInt(this.filters.type)
+          return parseInt(marker.error.error_id) === parseInt(this.filters.type);
         } else {
-          return true
+          return true;
         }
-      })
+      });
       marcadores = marcadores.filter((marker) => {
         if (this.filters.group !== null) {
-          const group = this.practice_groups[this.filters.group]
+          const group = this.practice_groups[this.filters.group];
           const user = group.users.some(
             (user) => parseInt(user.id) === parseInt(marker.user_id)
-          )
-          return user
+          );
+          return user;
         } else {
-          return true
+          return true;
         }
-      })
+      });
       marcadores = marcadores.filter((marker) => {
         if (this.filters.user !== null) {
-          return parseInt(marker.user_id) === parseInt(this.filters.user)
+          return parseInt(marker.user_id) === parseInt(this.filters.user);
         } else {
-          return true
+          return true;
         }
-      })
-      return marcadores
+      });
+      return marcadores;
     },
     addOrder(by, asc) {
-      this.order.by = by
-      this.order.asc = asc
+      this.order.by = by;
+      this.order.asc = asc;
     },
     orderMarkers(markers) {
       markers.sort((a, b) => {
         if (a.error[this.order.by] < b.error[this.order.by]) {
-          return this.order.asc === true ? -1 : 1
+          return this.order.asc === true ? -1 : 1;
         }
         if (a.error[this.order.by] > b.error[this.order.by]) {
-          return this.order.asc === true ? 1 : -1
+          return this.order.asc === true ? 1 : -1;
         }
-        return 0
-      })
-      return markers
+        return 0;
+      });
+      return markers;
     },
   },
-}
+};
 </script>
