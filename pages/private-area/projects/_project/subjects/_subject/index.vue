@@ -41,7 +41,11 @@
           <nuxt-link
             v-for="session in subject.sessions"
             :key="session.id"
-            :to="localePath(`/private/sessions/session/${session.id}`)"
+            :to="
+              localePath(
+                `/private-area/projects/${projectId}/subjects/${subject.id}/sessions/${session.id}`
+              )
+            "
             class="flex items-center justify-start w-full gap-2 p-2 text-sm font-semibold bg-white shadow-md transition-base rounded-xl h-fit hover:shadow-sm"
           >
             <span
@@ -55,14 +59,24 @@
       </div>
     </div>
 
-    <!-- Error types by session -->
-    <ErrorByTypeFamily :subject="subject" />
+    <!-- Error by type -->
+    <ErrorByType :errors="subject.errors" :markers="subject.markers" />
+
+    <!-- Error by Family -->
+    <ErrorByFamily
+      :families="subject.family_errors"
+      :markers="subject.markers"
+    />
 
     <!-- Errors by student -->
-    <ErrorsByStudent v-if="user.level == 'teacher'" :subject="subject" />
+    <ErrorsByStudent :students="subject.students" :markers="subject.markers" />
 
     <!-- Errors by timeline -->
-    <ErrorsByTimeline :subject="subject" />
+    <ErrorsBySessions
+      :sessions="subject.sessions"
+      :errors="subject.errors"
+      :markers="subject.markers"
+    />
   </div>
 </template>
 
@@ -73,14 +87,18 @@ export default {
   data: function () {
     return {
       title: '',
-      user: this.$auth.$storage.getUniversal('user'),
-      subject: 0,
+      user: null,
+      subject: {
+        errors: [],
+        markers: [],
+      },
       group: 0,
       supervisor: {
         username: '',
       },
       id: this.$route.params.subject,
       projectId: this.$route.params.project,
+      subjectId: this.$route.params.subject,
       showDate: new Date('2023-05-09'),
       events: [],
       attrs: [
@@ -101,6 +119,7 @@ export default {
     }
   },
   async created() {
+    this.user = this.$auth.$storage.getUniversal('user')
     const data = { id: this.id, userType: this.user.level }
     const response = await this.$axios.post(
       'academic/subjects/list_subject_by_id.json',

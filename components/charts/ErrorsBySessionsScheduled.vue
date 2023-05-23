@@ -3,7 +3,7 @@
     class="flex flex-col items-center justify-start w-full gap-2 text-gray-700 card"
   >
     <p class="w-full pl-2 text-xl font-bold text-left">
-      Errores cometidos a lo largo de la sesión
+      Errores cometidos en cada clase
     </p>
 
     <apexchart
@@ -19,7 +19,15 @@
 <script>
 export default {
   props: {
-    subject: {
+    schedules: {
+      type: Object,
+      default: () => ({}),
+    },
+    errors: {
+      type: Object,
+      default: () => ({}),
+    },
+    markers: {
       type: Object,
       default: () => ({}),
     },
@@ -47,25 +55,31 @@ export default {
     }
   },
   watch: {
-    subject(newValue, oldValue) {
-      const categories = newValue.sessions.map((session) => {
+    schedules(newValue, oldValue) {
+      console.log('schedules :>> ', this.markers)
+      // this.init()
+    },
+  },
+  methods: {
+    init: function () {
+      const categories = this.sessions.map((session) => {
         return session.name
       })
 
-      const sessionsIds = newValue.sessions.map((session) => {
+      const sessionsIds = this.sessions.map((session) => {
         return session.id
       })
 
       const series = []
 
-      Object.keys(newValue.errors).forEach((errorId) => {
+      Object.keys(this.errors).forEach((errorId) => {
         const serie = {
-          name: newValue.errors[errorId],
+          name: this.errors[errorId],
           data: [],
         }
 
         sessionsIds.forEach((sessionId) => {
-          const count = newValue.markers.filter((marker) => {
+          const count = this.markers.filter((marker) => {
             return (
               parseInt(marker.error_id) === parseInt(errorId) &&
               parseInt(marker.session_id) === parseInt(sessionId)
