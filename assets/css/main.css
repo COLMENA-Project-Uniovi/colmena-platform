@@ -31,10 +31,10 @@ body {
     @apply flex flex-col items-center justify-start gap-4 p-4 bg-white shadow-md transition-base rounded-xl;
   }
   .page-title{
-    @apply 2xl:text-4xl xl:text-3xl font-bold opacity-95;
+    @apply font-bold 2xl:text-4xl xl:text-3xl opacity-95;
   }
-  .page-pretitle{
-    @apply 2xl:text-3xl xl:text-2xl font-bold col-start-1 col-end-3 pl-2 mt-2 -mb-2;
+  .page-subitle{
+    @apply col-start-1 col-end-3 pl-2 mt-2 -mb-2 font-bold 2xl:text-3xl xl:text-2xl;
   }
 }
 

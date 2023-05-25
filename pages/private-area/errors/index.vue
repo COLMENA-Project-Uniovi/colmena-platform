@@ -7,6 +7,20 @@
       <h2 class="text-3xl font-bold opacity-95">¡{{ welcomeMessage }}!</h2>
       <p>Desde aquí podrás ver toda la librería de errores recopilados.</p>
     </div>
+    <h2 class="page-subtitle">Las familias de errores</h2>
+    <div v-if="families !== undefined" class="flex flex-col col-start-1 col-end-3 gap-4">
+      <ul class="grid w-full grid-cols-3 gap-4">
+        <li v-for="(family, index) in Object.values(families)" :key="family.id">
+          {{ Object.keys(families).length * 1 / 3 }}
+          <nuxt-link v-if="index <= (Object.keys(families).length * 1 / 3)"
+            :to="localePath(`/private-area/familys/${family.id}`)"
+            class="flex flex-col items-center justify-center gap-2 p-4 text-white shadow-lg bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 rounded-xl transition-base hover:scale-105">
+            <p>{{ family.name }}</p>
+            <p>{{ family.description }}</p>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
     <div v-if="errors !== undefined" class="flex flex-col col-start-1 col-end-3 gap-4">
       <h2 class="pl-5 text-2xl font-bold">Los errores</h2>
       <ul class="grid w-full grid-cols-3 gap-4">

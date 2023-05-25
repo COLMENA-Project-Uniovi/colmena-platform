@@ -11,7 +11,7 @@
       <p>{{ session.objective }}</p>
     </div>
 
-    <h2 class="page-pretitle">Métricas de errores</h2>
+    <h2 class="page-subitle">Métricas de errores</h2>
 
     <!-- Charts -->
     <!-- Error by type -->
@@ -27,7 +27,7 @@
     <ErrorsBySessionsScheduled :schedules="session.session_schedules" :errors="session.errors"
       :markers="filter(markers)" />
 
-    <h2 class="page-pretitle">Compilaciones y errores de esta sesión</h2>
+    <h2 class="page-subitle">Compilaciones y errores de esta sesión</h2>
 
     <!-- Filters -->
     <div class="relative flex w-full col-start-1 col-end-3 gap-4">
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <!-- <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
+    <div class="flex flex-col items-center justify-start w-full gap-2 text-gray-700">
       <div class="flex items-center justify-between w-full px-2">
         <p class="w-full font-semibold text-left">Errores</p>
         <div class="flex items-center justify-center gap-2">
@@ -110,21 +110,21 @@
                 </div>
               </div>
               <div
-                class="flex items-center gap-1 text-xs p-1 bg-green-600 font-semibold text-white rounded-lg  opacity-90">
+                class="flex items-center gap-1 p-1 text-xs font-semibold text-white bg-green-600 rounded-lg opacity-90">
                 <font-awesome-icon icon="fa-regular fa-calendar" class="opacity-60" />
                 <span class=""> {{
                   marker.timestamp.split('T')[0]
                 }} </span>
               </div>
               <div
-                class="flex items-center gap-1 text-xs p-1 bg-orange-600 font-semibold text-white rounded-lg opacity-90 ">
+                class="flex items-center gap-1 p-1 text-xs font-semibold text-white bg-orange-600 rounded-lg opacity-90 ">
                 <font-awesome-icon icon="fa-regular fa-clock" class="opacity-60" />
                 <span class=""> {{
                   marker.timestamp.split('T')[1] }}
                 </span>
               </div>
               <div
-                class="flex items-center gap-1 text-xs p-1 bg-violet-600 font-semibold text-white rounded-lg opacity-90 ">
+                class="flex items-center gap-1 p-1 text-xs font-semibold text-white rounded-lg bg-violet-600 opacity-90 ">
                 <font-awesome-icon icon="fa-regular fa-user" class="opacity-60" />
                 <span class=""> {{ marker.user.name }} {{ marker.user.surname }}
                 </span>
@@ -164,7 +164,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
