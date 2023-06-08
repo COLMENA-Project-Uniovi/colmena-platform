@@ -59,6 +59,8 @@
         </li>
       </ul>
     </div>
+    <!-- Error by type -->
+    <ErrorByErrorType :errors="errors" />
   </div>
 </template>
 
@@ -73,7 +75,7 @@ export default {
       subjects: 0,
       project: null,
       projectId: this.$route.params.project,
-      showDate: new Date(),
+      errors: [],
     }
   },
   head() {
@@ -111,11 +113,14 @@ export default {
     this.title = this.project.name
     this.$store.commit('setPageTitle', this.title)
     this.$store.commit('setProject', this.project)
-  },
-  methods: {
-    setShowDate(d) {
-      this.showDate = d
-    },
+
+    const dataErrors = { id: this.projectId }
+    const responseErrors = await this.$axios.post(
+      'academic/subjects/get-all-project-errors.json',
+      dataErrors
+    )
+    const responseJSONErrors = await responseErrors
+    this.errors = responseJSONErrors.data
   },
 }
 </script>

@@ -20,7 +20,7 @@
         <li v-for="project in projects" :key="project.id">
           <nuxt-link
             :to="localePath(`/private-area/projects/${project.id}`)"
-            class="flex flex-col items-center justify-center gap-2 p-4 text-white shadow-lg bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 rounded-xl transition-base hover:scale-105"
+            class="flex flex-col items-center justify-start h-full gap-2 p-4 text-white shadow-lg bg-gradient-to-tr from-colmenablue-600 via-colmenablue-600 to-colmenablue-400 rounded-xl transition-base hover:scale-105"
           >
             <div class="flex items-center justify-start w-full gap-3">
               <span
@@ -28,14 +28,14 @@
               >
                 {{ $abbreviate(project.name) }}
               </span>
-              <div class="flex flex-col justify-between h-full py-1">
+              <div class="flex flex-col justify-center h-full py-1">
                 <span class="text-lg font-semibold">
                   {{ project.name }}
                 </span>
               </div>
             </div>
             <div
-              class="flex items-center justify-center w-full gap-2 border-t-[1px] border-white/30 pt-4 font-semibold text-sm"
+              class="flex items-center justify-start w-full gap-2 border-t-[1px] border-white/30 pt-4 font-semibold text-sm"
             >
               <p>{{ project.description }}</p>
             </div>
@@ -43,7 +43,8 @@
         </li>
       </ul>
     </div>
-    <div v-if="user.level === 'teacher'" class="fixed bottom-5 right-5">
+
+    <div v-if="user.level === 'teacher'" class="fixed z-50 bottom-5 right-5">
       <nuxt-link
         :to="localePath('/private-area/projects/add')"
         class="button button-primary hover:scale-105 transition-base"
@@ -63,7 +64,8 @@ export default {
     return {
       user: this.$auth.$storage.getUniversal('user'),
       title: 'Selecciona un projecto',
-      projects: 0,
+      projects: [],
+      errors: [],
     }
   },
   head() {

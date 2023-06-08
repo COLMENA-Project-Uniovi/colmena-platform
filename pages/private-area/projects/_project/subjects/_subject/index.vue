@@ -139,9 +139,10 @@ export default {
         })
       }
       sessionsSchedules.forEach((sessionSchedule) => {
+        console.log('session :>> ', sessionSchedule)
         const event = {
           startDate: sessionSchedule.date,
-          title: `${session.name} - ${sessionSchedule.practice_group.name}`,
+          title: `${session.name} - ${sessionSchedule.practice_group?.name}`,
           url: `/private/sessions/session/${session.id}`,
         }
         this.events.push(event)
